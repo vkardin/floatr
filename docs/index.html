@@ -82,10 +82,13 @@
   </div>
 </section>
 
-<section id="donate">
+<section class="block donate" id="donate">
   <div class="wrap">
-    <h2 data-i18n="dTitle">Support Floatr</h2>
-    <p class="sub" data-i18n="dSub">Floatr is free and open source. Report bugs and ideas on <a href="support.html">the support page</a> or star the project on GitHub.</p>
+    <h2 data-i18n="d_title">Support the project</h2>
+    <p class="sub" data-i18n="d_sub">Floatr is free and has no ads. If you enjoy it, you can support development with crypto. Any amount helps ship new versions.</p>
+    <div class="wallets" id="wallets"></div>
+    <p class="warn" data-i18n="d_warn">Send coins only on the network shown on the card. A transfer on another network may be lost.</p>
+    <p class="thanks" data-i18n="d_thanks">Thank you for being here.</p>
   </div>
 </section>
 
@@ -98,7 +101,16 @@
     <a class="sp" href="https://github.com/vkardin/video-glow" data-i18n="fromAuthor">From the author of Video Glow</a>
   </div>
 </footer>
+<template id="wallet">
+  <div class="tile">
+    <div class="coin"><i></i><div><b></b><small></small></div></div>
+    <div class="qr"><img alt="QR" width="300" height="300"></div>
+    <div class="addr"></div>
+    <button type="button" class="btn copy"></button>
+  </div>
+</template>
 <script src="i18n.js"></script>
 <script src="app.js"></script>
+<script src="donate.js"></script>
 </body>
 </html>
