@@ -584,6 +584,7 @@
 
   const PLAYER_CSS = `
     .fl-root{position:relative;width:100%;height:100%;background:#000;overflow:hidden;font:500 13px/1.3 system-ui,-apple-system,"Segoe UI",sans-serif;color:#fff;cursor:grab}
+    .fl-root video{position:absolute!important;inset:0!important;left:0!important;top:0!important;width:100%!important;height:100%!important;max-width:none!important;max-height:none!important;min-width:0!important;min-height:0!important;margin:0!important;transform:none!important;object-fit:contain!important}
     .fl-subs{position:absolute;left:50%;bottom:52px;transform:translateX(-50%);max-width:90%;text-align:center;white-space:pre-line;background:rgba(0,0,0,.72);padding:4px 10px;border-radius:6px;font-size:clamp(13px,3.4vw,22px);pointer-events:none;z-index:2}
     .fl-toast{position:absolute;top:10px;left:50%;transform:translateX(-50%);background:rgba(17,20,28,.9);padding:6px 12px;border-radius:8px;opacity:0;transition:opacity .15s;pointer-events:none;z-index:4}
     .fl-toast.on{opacity:1}
