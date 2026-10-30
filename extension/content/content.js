@@ -222,6 +222,7 @@
     v = v || pickVideo();
     if (!v) { toast(t('noVideo')); return { ok: false, error: 'noVideo' }; }
     if (state.mode) { closePlayer(); return { ok: true, mode: null }; }
+    if (state.settings.floatMode === 'page') { openFloat(v); return { ok: true, mode: 'float' }; }
     if (window.documentPictureInPicture && top === window) {
       try { await openDocPip(v); return { ok: true, mode: 'docpip' }; } catch (e) { /* fall through */ }
     }
@@ -288,7 +289,9 @@
       if (Math.abs(dh) > 4) { try { pw.resizeBy(0, dh); } catch (e) { /* not allowed yet */ } }
     };
     fit();
-    pw.addEventListener('pointerdown', fit, { once: true });
+    pw.addEventListener('pointerdown', fit);
+    let resizeTimer;
+    pw.addEventListener('resize', () => { clearTimeout(resizeTimer); resizeTimer = setTimeout(fit, 250); });
     v.addEventListener('loadedmetadata', () => state.pipWindow === pw && fit(), { once: true });
     applyOpacity();
   }
@@ -356,7 +359,6 @@
 
   function applyOpacity() {
     const o = Math.min(100, Math.max(30, state.settings.opacity)) / 100;
-    if (state.mode === 'docpip' && state.pipWindow) state.pipWindow.document.body.style.opacity = o;
     if (state.mode === 'float' && state.floatHost) state.floatHost.style.opacity = o;
     state.ui && state.ui.refresh();
   }
@@ -480,7 +482,8 @@
       win.navigator.clipboard.writeText(linkAt(v)).then(() => ui.toast(t('linkCopied')), () => ui.toast(linkAt(v)));
     }, b.link);
     let range = null;
-    if (b.opacity) {
+    // A separate window is always opaque to the desktop, so opacity is offered only in the page player.
+    if (b.opacity && inPage) {
       range = doc.createElement('input');
       range.type = 'range';
       range.min = 30; range.max = 100; range.step = 5;

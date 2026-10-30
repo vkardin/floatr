@@ -25,7 +25,7 @@ Floatr pops any web video out into a floating window that stays on top while you
 - **Bookmarks and frame notes.** Save a moment with an optional note from the popup, from the floating window or with <kbd>Alt</kbd>+<kbd>Shift</kbd>+<kbd>B</kbd>.
 - **Markdown export.** Export the notes of one video or of everything into a clean `.md` file with clickable timecodes.
 - **Copy link with timecode** in one click (YouTube, Vimeo, Twitch and generic `#t=` links).
-- **Shadow mode.** An opacity slider from 30% to 100% for the floating window.
+- **Shadow mode.** An opacity slider from 30% to 100% for the mini player over the page (a separate window is always opaque in browsers).
 - **Quick control.** Playback speed 0.25×–4× and volume presets right in the player and the popup, plus hotkeys.
 - **Customisable buttons.** Choose which controls the floating window shows.
 - **English, Russian and Ukrainian** interface; the popup follows the system light or dark theme.

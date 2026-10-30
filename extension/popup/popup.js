@@ -145,6 +145,7 @@
   });
   $('autoResume').addEventListener('change', (e) => F.saveSettings({ autoResume: e.target.checked }));
   $('hoverButton').addEventListener('change', (e) => F.saveSettings({ hoverButton: e.target.checked }));
+  $('pageMode').addEventListener('change', (e) => F.saveSettings({ floatMode: e.target.checked ? 'page' : 'window' }));
 
   async function init() {
     settings = await F.getSettings();
@@ -152,6 +153,7 @@
     $('opOut').textContent = settings.opacity + '%';
     $('autoResume').checked = settings.autoResume;
     $('hoverButton').checked = settings.hoverButton;
+    $('pageMode').checked = settings.floatMode === 'page';
     const box = $('btnToggles');
     BUTTONS.forEach((k) => {
       const l = document.createElement('label');

@@ -154,5 +154,11 @@
   },
   "btnGroup_opacity": {
     "message": "Opacity"
+  },
+  "setPageMode": {
+    "message": "Mini player over the page instead of a separate window"
+  },
+  "opacityHint": {
+    "message": "Opacity works in the mini player over the page. A separate window is always opaque: the browser does not let it be see-through."
   }
 }

@@ -9,6 +9,7 @@
     opacity: 100,
     autoResume: true,
     hoverButton: true,
+    floatMode: 'window', // 'window' (separate always-on-top window) or 'page' (mini player over the page)
     buttons: {
       play: true,
       seek: true,
