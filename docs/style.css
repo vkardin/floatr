@@ -32,7 +32,7 @@ nav.links a:hover{color:var(--text)}
 .pip .ctl i{width:16px;height:16px;border-radius:4px;background:rgba(255,255,255,.85);display:inline-block}
 .pip .ctl b{margin-left:auto;color:#2dd4bf}
 .pip .wave{position:absolute;left:12%;right:12%;top:30%;height:40px}
-.toast{position:absolute;left:22px;bottom:22px;background:rgba(17,20,28,.94);color:#fff;font-size:13px;padding:8px 12px;border-radius:10px;display:flex;gap:8px;align-items:center}
+.toast{position:absolute;left:22px;top:46%;z-index:2;background:rgba(17,20,28,.94);color:#fff;font-size:13px;padding:8px 12px;border-radius:10px;display:flex;gap:8px;align-items:center}
 .toast span{background:#2dd4bf;color:#06201d;padding:3px 8px;border-radius:6px;font-weight:600}
 @keyframes float{50%{transform:translateY(-8px)}}
 section{padding:64px 0}
