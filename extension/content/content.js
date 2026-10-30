@@ -280,6 +280,16 @@
     state.ui = buildPlayer(pw.document, pw.document.body, v, pw);
     if (wasPlaying) v.play().catch(() => {});
     pw.addEventListener('pagehide', () => teardown());
+    // Chrome may reopen the window at the size it remembers for this site. Fit the height to the
+    // video's aspect ratio right away, and again on the first click (resizing can need a user gesture).
+    const fit = () => {
+      const vr = (v.videoWidth && v.videoHeight) ? v.videoHeight / v.videoWidth : ratio;
+      const dh = Math.round(pw.innerWidth * vr) - pw.innerHeight;
+      if (Math.abs(dh) > 4) { try { pw.resizeBy(0, dh); } catch (e) { /* not allowed yet */ } }
+    };
+    fit();
+    pw.addEventListener('pointerdown', fit, { once: true });
+    v.addEventListener('loadedmetadata', () => state.pipWindow === pw && fit(), { once: true });
     applyOpacity();
   }
 
