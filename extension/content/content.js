@@ -409,9 +409,30 @@
     subs.style.display = 'none';
     const toastEl = doc.createElement('div');
     toastEl.className = 'fl-toast';
+    const panel = doc.createElement('div');
+    panel.className = 'fl-panel';
+    const prog = doc.createElement('div');
+    prog.className = 'fl-prog';
+    const seek = doc.createElement('input');
+    seek.type = 'range'; seek.min = 0; seek.max = 1000; seek.value = 0;
+    seek.className = 'fl-seek';
+    const timeEl = doc.createElement('span');
+    timeEl.className = 'fl-time';
+    prog.append(seek, timeEl);
+    seek.addEventListener('pointerdown', (e) => e.stopPropagation());
+    seek.addEventListener('input', () => { if (isFinite(v.duration)) v.currentTime = seek.value / 1000 * v.duration; });
     const bar = doc.createElement('div');
     bar.className = 'fl-bar';
-    wrap.append(subs, toastEl, bar);
+    panel.append(prog, bar);
+    wrap.append(subs, toastEl, panel);
+    const tick = () => {
+      const d = v.duration;
+      const p = isFinite(d) && d > 0 ? v.currentTime / d : 0;
+      seek.value = Math.round(p * 1000);
+      seek.style.setProperty('--p', (p * 100) + '%');
+      timeEl.textContent = F.fmtTime(v.currentTime) + (isFinite(d) ? ' / ' + F.fmtTime(d) : '');
+    };
+    v.addEventListener('timeupdate', () => state.ui === ui && tick());
     mount.appendChild(wrap);
 
     const btn = (icon, title, fn, show) => {
@@ -483,6 +504,7 @@
         if (speedLbl) speedLbl.textContent = v.playbackRate + '×';
         if (volLbl) volLbl.textContent = (v.muted ? 0 : Math.round(v.volume * 100)) + '%';
         if (range) range.value = state.settings.opacity;
+        tick();
       }
     };
     ['play', 'pause', 'ratechange', 'volumechange'].forEach((ev) => v.addEventListener(ev, () => state.ui === ui && ui.refresh()));
@@ -574,8 +596,8 @@
 
   const OVERLAY_CSS = `
     .toasts{position:fixed;left:50%;bottom:32px;transform:translateX(-50%);display:flex;flex-direction:column;gap:8px;align-items:center;font:500 14px/1.4 system-ui,-apple-system,"Segoe UI",sans-serif}
-    .toast{background:rgba(17,20,28,.94);color:#fff;padding:10px 16px;border-radius:12px;box-shadow:0 8px 28px rgba(0,0,0,.35);display:flex;gap:10px;align-items:center;animation:in .18s ease-out}
-    .toast button{font:inherit;border:0;border-radius:8px;padding:6px 12px;background:#2dd4bf;color:#06201d;cursor:pointer;font-weight:600}
+    .toast{background:rgba(13,16,23,.86);backdrop-filter:blur(14px);border:1px solid rgba(255,255,255,.08);color:#fff;padding:9px 10px 9px 16px;border-radius:14px;box-shadow:0 12px 36px rgba(0,0,0,.35);display:flex;gap:10px;align-items:center;animation:in .18s ease-out}
+    .toast button{font:inherit;border:0;border-radius:9px;padding:6px 14px;background:linear-gradient(90deg,#14b8a6,#5eead4);color:#06201d;cursor:pointer;font-weight:600}
     .toast button.ghost{background:transparent;color:#cbd5e1;padding:6px 8px}
     .hover{position:fixed;width:36px;height:36px;border:0;border-radius:10px;background:rgba(17,20,28,.8);color:#2dd4bf;cursor:pointer;display:grid;place-items:center;opacity:0;pointer-events:none;transition:opacity .15s}
     .hover.on{opacity:1;pointer-events:auto}
@@ -585,14 +607,23 @@
   const PLAYER_CSS = `
     .fl-root{position:relative;width:100%;height:100%;background:#000;overflow:hidden;font:500 13px/1.3 system-ui,-apple-system,"Segoe UI",sans-serif;color:#fff;cursor:grab}
     .fl-root video{position:absolute!important;inset:0!important;left:0!important;top:0!important;width:100%!important;height:100%!important;max-width:none!important;max-height:none!important;min-width:0!important;min-height:0!important;margin:0!important;transform:none!important;object-fit:contain!important}
-    .fl-subs{position:absolute;left:50%;bottom:52px;transform:translateX(-50%);max-width:90%;text-align:center;white-space:pre-line;background:rgba(0,0,0,.72);padding:4px 10px;border-radius:6px;font-size:clamp(13px,3.4vw,22px);pointer-events:none;z-index:2}
-    .fl-toast{position:absolute;top:10px;left:50%;transform:translateX(-50%);background:rgba(17,20,28,.9);padding:6px 12px;border-radius:8px;opacity:0;transition:opacity .15s;pointer-events:none;z-index:4}
-    .fl-toast.on{opacity:1}
-    .fl-bar{position:absolute;left:0;right:0;bottom:0;display:flex;align-items:center;gap:2px;padding:6px 8px;background:linear-gradient(transparent,rgba(0,0,0,.8));opacity:0;transition:opacity .2s;z-index:3}
-    .fl-root:hover .fl-bar{opacity:1}
-    .fl-bar button{border:0;background:transparent;color:#fff;width:30px;height:30px;border-radius:8px;cursor:pointer;display:grid;place-items:center;padding:0;font:inherit}
-    .fl-bar button:hover{background:rgba(255,255,255,.16);color:#2dd4bf}
-    .fl-bar .fl-label{width:auto;min-width:38px;padding:0 6px;font-variant-numeric:tabular-nums}
+    .fl-subs{position:absolute;left:50%;bottom:88px;transform:translateX(-50%);max-width:90%;text-align:center;white-space:pre-line;background:rgba(0,0,0,.72);padding:4px 10px;border-radius:6px;font-size:clamp(13px,3.4vw,22px);pointer-events:none;z-index:2}
+    .fl-toast{position:absolute;top:12px;left:50%;transform:translateX(-50%) translateY(-4px);background:rgba(13,16,23,.82);backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,.08);padding:7px 14px;border-radius:99px;opacity:0;transition:opacity .18s,transform .18s;pointer-events:none;z-index:4;white-space:nowrap}
+    .fl-toast.on{opacity:1;transform:translateX(-50%)}
+    .fl-panel{position:absolute;left:8px;right:8px;bottom:8px;padding:6px 8px 4px;border-radius:14px;background:rgba(13,16,23,.72);backdrop-filter:blur(14px) saturate(1.4);border:1px solid rgba(255,255,255,.08);box-shadow:0 8px 30px rgba(0,0,0,.35);opacity:0;transform:translateY(6px);transition:opacity .2s,transform .2s;z-index:3}
+    .fl-root:hover .fl-panel,.fl-root:focus-within .fl-panel{opacity:1;transform:none}
+    .fl-prog{display:flex;align-items:center;gap:8px;padding:0 4px}
+    .fl-seek{flex:1;-webkit-appearance:none;appearance:none;height:4px;border-radius:99px;margin:6px 0;background:linear-gradient(90deg,#2dd4bf var(--p,0%),rgba(255,255,255,.22) var(--p,0%));cursor:pointer;outline:none}
+    .fl-seek::-webkit-slider-thumb{-webkit-appearance:none;width:12px;height:12px;border-radius:50%;background:#fff;box-shadow:0 0 0 3px rgba(45,212,191,.35);transform:scale(0);transition:transform .15s}
+    .fl-prog:hover .fl-seek::-webkit-slider-thumb{transform:scale(1)}
+    .fl-seek::-moz-range-thumb{width:10px;height:10px;border:0;border-radius:50%;background:#fff}
+    .fl-time{font-size:11px;color:rgba(255,255,255,.75);font-variant-numeric:tabular-nums;white-space:nowrap}
+    .fl-bar{display:flex;align-items:center;gap:1px}
+    .fl-bar button{border:0;background:transparent;color:rgba(255,255,255,.9);width:30px;height:30px;border-radius:9px;cursor:pointer;display:grid;place-items:center;padding:0;font:inherit;transition:background .12s,color .12s}
+    .fl-bar button:hover{background:rgba(255,255,255,.12);color:#2dd4bf}
+    .fl-bar .fl-label{width:auto;min-width:40px;padding:0 7px;font-size:12px;font-weight:600;font-variant-numeric:tabular-nums;background:rgba(255,255,255,.08)}
     .fl-spacer{flex:1}
-    .fl-range{width:70px;accent-color:#2dd4bf;cursor:pointer}`;
+    .fl-range{width:64px;-webkit-appearance:none;appearance:none;height:4px;border-radius:99px;background:rgba(255,255,255,.22);cursor:pointer;outline:none;margin:0 4px}
+    .fl-range::-webkit-slider-thumb{-webkit-appearance:none;width:12px;height:12px;border-radius:50%;background:#2dd4bf}
+    @media (max-width:360px){.fl-bar .fl-label,.fl-range{display:none}}`;
 })();
