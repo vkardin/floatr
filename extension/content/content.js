@@ -13,7 +13,6 @@
     mode: null,          // 'docpip' | 'float' | 'native'
     video: null,         // video currently in the floating player
     placeholder: null,
-    origStyle: null,
     pipWindow: null,
     ui: null,
     subsObserver: null,
@@ -241,7 +240,6 @@
 
   function detachVideo(v) {
     state.video = v;
-    state.origStyle = v.getAttribute('style');
     state.origControls = v.controls;
     v.controls = false;
     if (overlay) overlay.hover.classList.remove('on');
@@ -249,12 +247,8 @@
     const r = v.getBoundingClientRect();
     state.placeholder.style.cssText = 'width:' + r.width + 'px;height:' + r.height + 'px;background:#000;';
     v.parentNode.insertBefore(state.placeholder, v);
-    const css = 'position:absolute;inset:0;width:100%;height:100%;left:0;top:0;object-fit:contain;' +
-      'transform:none;max-width:none;max-height:none;margin:0;';
-    css.split(';').filter(Boolean).forEach((rule) => {
-      const i = rule.indexOf(':');
-      v.style.setProperty(rule.slice(0, i), rule.slice(i + 1), 'important');
-    });
+    // Sizing is done by the player stylesheet; the element's own inline style is left untouched
+    // so the site and other extensions find it exactly as they left it.
   }
 
   function reattachVideo() {
@@ -262,7 +256,6 @@
     if (!v || !state.placeholder) return;
     const wasPlaying = !v.paused;
     state.placeholder.replaceWith(v);
-    if (state.origStyle == null) v.removeAttribute('style'); else v.setAttribute('style', state.origStyle);
     v.controls = state.origControls;
     if (wasPlaying) v.play().catch(() => {});
     state.placeholder = null;
@@ -271,8 +264,11 @@
   async function openDocPip(v) {
     const r = v.getBoundingClientRect();
     const ratio = (v.videoWidth && v.videoHeight) ? v.videoHeight / v.videoWidth : (r.height / r.width || 9 / 16);
-    const width = 560;
-    const pw = await window.documentPictureInPicture.requestWindow({ width, height: Math.round(width * ratio) });
+    // Size from the video's own aspect ratio in CSS pixels, so screen scaling does not change the shape.
+    const avail = Math.max(320, (screen.availWidth || 1280));
+    const width = Math.round(Math.min(640, avail * 0.42));
+    const height = Math.round(Math.min(width * ratio, (screen.availHeight || 800) * 0.7));
+    const pw = await window.documentPictureInPicture.requestWindow({ width, height, preferInitialWindowPlacement: true });
     const wasPlaying = !v.paused;
     detachVideo(v);
     state.mode = 'docpip';
@@ -606,7 +602,7 @@
 
   const PLAYER_CSS = `
     .fl-root{position:relative;width:100%;height:100%;background:#000;overflow:hidden;font:500 13px/1.3 system-ui,-apple-system,"Segoe UI",sans-serif;color:#fff;cursor:grab}
-    .fl-root video{position:absolute!important;inset:0!important;left:0!important;top:0!important;width:100%!important;height:100%!important;max-width:none!important;max-height:none!important;min-width:0!important;min-height:0!important;margin:0!important;transform:none!important;object-fit:contain!important}
+    .fl-root video{position:absolute!important;inset:0!important;left:0!important;top:0!important;width:100%!important;height:100%!important;max-width:none!important;max-height:none!important;min-width:0!important;min-height:0!important;margin:0!important;transform:none!important;object-fit:contain!important;opacity:1!important;visibility:visible!important;display:block!important;filter:none!important;clip-path:none!important}
     .fl-subs{position:absolute;left:50%;bottom:88px;transform:translateX(-50%);max-width:90%;text-align:center;white-space:pre-line;background:rgba(0,0,0,.72);padding:4px 10px;border-radius:6px;font-size:clamp(13px,3.4vw,22px);pointer-events:none;z-index:2}
     .fl-toast{position:absolute;top:12px;left:50%;transform:translateX(-50%) translateY(-4px);background:rgba(13,16,23,.82);backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,.08);padding:7px 14px;border-radius:99px;opacity:0;transition:opacity .18s,transform .18s;pointer-events:none;z-index:4;white-space:nowrap}
     .fl-toast.on{opacity:1;transform:translateX(-50%)}
