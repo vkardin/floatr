@@ -1,0 +1,158 @@
+{
+  "extName": {
+    "message": "Floatr — плаваючий відеоплеєр"
+  },
+  "extDescription": {
+    "message": "Плаваючий відеоплеєр із пам'яттю таймкодів, субтитрами, нотатками до кадру, експортом у Markdown, режимом тіні та швидким контролем звуку."
+  },
+  "cmdSpeedUp": {
+    "message": "Збільшити швидкість"
+  },
+  "cmdSpeedDown": {
+    "message": "Зменшити швидкість"
+  },
+  "cmdBookmark": {
+    "message": "Закладка на поточний момент"
+  },
+  "btnFloat": {
+    "message": "Винести відео"
+  },
+  "btnUnfloat": {
+    "message": "Повернути відео на сторінку"
+  },
+  "resumeAsk": {
+    "message": "Продовжити з $1?"
+  },
+  "resumeYes": {
+    "message": "Продовжити"
+  },
+  "resumeNo": {
+    "message": "Спочатку"
+  },
+  "noVideo": {
+    "message": "На сторінці не знайдено відео"
+  },
+  "speedIs": {
+    "message": "Швидкість: $1"
+  },
+  "volumeIs": {
+    "message": "Гучність: $1"
+  },
+  "bookmarkSaved": {
+    "message": "Закладку збережено на $1"
+  },
+  "btnPlay": {
+    "message": "Пуск / пауза"
+  },
+  "btnBack": {
+    "message": "Назад 10 с"
+  },
+  "btnForward": {
+    "message": "Вперед 10 с"
+  },
+  "btnSlower": {
+    "message": "Повільніше"
+  },
+  "btnSpeedReset": {
+    "message": "Скинути швидкість на 1×"
+  },
+  "btnFaster": {
+    "message": "Швидше"
+  },
+  "btnVolume": {
+    "message": "Пресет гучності"
+  },
+  "btnBookmark": {
+    "message": "Закладка з нотаткою"
+  },
+  "notePrompt": {
+    "message": "Нотатка до $1 (необов'язково):"
+  },
+  "btnCopyLink": {
+    "message": "Копіювати посилання з таймкодом"
+  },
+  "linkCopied": {
+    "message": "Посилання скопійовано"
+  },
+  "opacity": {
+    "message": "Прозорість"
+  },
+  "btnClose": {
+    "message": "Закрити"
+  },
+  "popupNoVideo": {
+    "message": "Відкрийте сторінку з відео, щоб користуватися Floatr. Відео на сторінках браузера та інших розширень недоступні."
+  },
+  "pipHint": {
+    "message": "Браузер заблокував плаваюче вікно. Клацніть по відео, потім натисніть Alt+Shift+P або кнопку поверх відео."
+  },
+  "notePlaceholder": {
+    "message": "Нотатка до кадру (необов'язково)"
+  },
+  "speed": {
+    "message": "Швидкість"
+  },
+  "volume": {
+    "message": "Гучність"
+  },
+  "bookmarks": {
+    "message": "Закладки"
+  },
+  "bookmarksEmpty": {
+    "message": "Закладок поки немає"
+  },
+  "exportThis": {
+    "message": "Експорт цього відео"
+  },
+  "exportAll": {
+    "message": "Експорт усього"
+  },
+  "settings": {
+    "message": "Налаштування"
+  },
+  "setAutoResume": {
+    "message": "Пропонувати продовжити з місця зупинки"
+  },
+  "setHoverButton": {
+    "message": "Кнопка винесення поверх відео"
+  },
+  "setButtons": {
+    "message": "Кнопки плеєра:"
+  },
+  "website": {
+    "message": "Сайт"
+  },
+  "support": {
+    "message": "Підтримка"
+  },
+  "jumpTo": {
+    "message": "Перейти до моменту"
+  },
+  "delete": {
+    "message": "Видалити"
+  },
+  "mdHeading": {
+    "message": "Закладки Floatr"
+  },
+  "btnGroup_play": {
+    "message": "Пуск"
+  },
+  "btnGroup_seek": {
+    "message": "Перемотка ±10 с"
+  },
+  "btnGroup_speed": {
+    "message": "Швидкість"
+  },
+  "btnGroup_volume": {
+    "message": "Гучність"
+  },
+  "btnGroup_bookmark": {
+    "message": "Закладка"
+  },
+  "btnGroup_link": {
+    "message": "Посилання"
+  },
+  "btnGroup_opacity": {
+    "message": "Прозорість"
+  }
+}

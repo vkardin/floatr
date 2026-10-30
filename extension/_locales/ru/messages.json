@@ -1,0 +1,158 @@
+{
+  "extName": {
+    "message": "Floatr — плавающий видеоплеер"
+  },
+  "extDescription": {
+    "message": "Плавающий видеоплеер с памятью таймкодов, субтитрами, заметками к кадру, экспортом в Markdown, режимом тени и быстрым контролем звука."
+  },
+  "cmdSpeedUp": {
+    "message": "Увеличить скорость"
+  },
+  "cmdSpeedDown": {
+    "message": "Уменьшить скорость"
+  },
+  "cmdBookmark": {
+    "message": "Закладка на текущий момент"
+  },
+  "btnFloat": {
+    "message": "Вынести видео"
+  },
+  "btnUnfloat": {
+    "message": "Вернуть видео на страницу"
+  },
+  "resumeAsk": {
+    "message": "Продолжить с $1?"
+  },
+  "resumeYes": {
+    "message": "Продолжить"
+  },
+  "resumeNo": {
+    "message": "Сначала"
+  },
+  "noVideo": {
+    "message": "На странице не найдено видео"
+  },
+  "speedIs": {
+    "message": "Скорость: $1"
+  },
+  "volumeIs": {
+    "message": "Громкость: $1"
+  },
+  "bookmarkSaved": {
+    "message": "Закладка сохранена на $1"
+  },
+  "btnPlay": {
+    "message": "Пуск / пауза"
+  },
+  "btnBack": {
+    "message": "Назад 10 с"
+  },
+  "btnForward": {
+    "message": "Вперёд 10 с"
+  },
+  "btnSlower": {
+    "message": "Медленнее"
+  },
+  "btnSpeedReset": {
+    "message": "Сбросить скорость на 1×"
+  },
+  "btnFaster": {
+    "message": "Быстрее"
+  },
+  "btnVolume": {
+    "message": "Пресет громкости"
+  },
+  "btnBookmark": {
+    "message": "Закладка с заметкой"
+  },
+  "notePrompt": {
+    "message": "Заметка к $1 (необязательно):"
+  },
+  "btnCopyLink": {
+    "message": "Копировать ссылку с таймкодом"
+  },
+  "linkCopied": {
+    "message": "Ссылка скопирована"
+  },
+  "opacity": {
+    "message": "Прозрачность"
+  },
+  "btnClose": {
+    "message": "Закрыть"
+  },
+  "popupNoVideo": {
+    "message": "Откройте страницу с видео, чтобы пользоваться Floatr. Видео на страницах браузера и других расширений недоступны."
+  },
+  "pipHint": {
+    "message": "Браузер заблокировал плавающее окно. Кликните по видео, затем нажмите Alt+Shift+P или кнопку поверх видео."
+  },
+  "notePlaceholder": {
+    "message": "Заметка к кадру (необязательно)"
+  },
+  "speed": {
+    "message": "Скорость"
+  },
+  "volume": {
+    "message": "Громкость"
+  },
+  "bookmarks": {
+    "message": "Закладки"
+  },
+  "bookmarksEmpty": {
+    "message": "Закладок пока нет"
+  },
+  "exportThis": {
+    "message": "Экспорт этого видео"
+  },
+  "exportAll": {
+    "message": "Экспорт всего"
+  },
+  "settings": {
+    "message": "Настройки"
+  },
+  "setAutoResume": {
+    "message": "Предлагать продолжить с места остановки"
+  },
+  "setHoverButton": {
+    "message": "Кнопка выноса поверх видео"
+  },
+  "setButtons": {
+    "message": "Кнопки плеера:"
+  },
+  "website": {
+    "message": "Сайт"
+  },
+  "support": {
+    "message": "Поддержка"
+  },
+  "jumpTo": {
+    "message": "Перейти к моменту"
+  },
+  "delete": {
+    "message": "Удалить"
+  },
+  "mdHeading": {
+    "message": "Закладки Floatr"
+  },
+  "btnGroup_play": {
+    "message": "Пуск"
+  },
+  "btnGroup_seek": {
+    "message": "Перемотка ±10 с"
+  },
+  "btnGroup_speed": {
+    "message": "Скорость"
+  },
+  "btnGroup_volume": {
+    "message": "Громкость"
+  },
+  "btnGroup_bookmark": {
+    "message": "Закладка"
+  },
+  "btnGroup_link": {
+    "message": "Ссылка"
+  },
+  "btnGroup_opacity": {
+    "message": "Прозрачность"
+  }
+}

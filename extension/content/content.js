@@ -1,0 +1,597 @@
+// Floatr content script: floating player, timecode memory, bookmarks, quick controls.
+(function () {
+  'use strict';
+  if (window.__floatrLoaded) return;
+  window.__floatrLoaded = true;
+
+  const F = globalThis.Floatr;
+  const api = F.api;
+  const t = (id, subs) => api.i18n.getMessage(id, subs) || id;
+
+  const state = {
+    settings: F.DEFAULTS,
+    mode: null,          // 'docpip' | 'float' | 'native'
+    video: null,         // video currently in the floating player
+    placeholder: null,
+    origStyle: null,
+    pipWindow: null,
+    ui: null,
+    subsObserver: null,
+    lastSave: 0,
+    resumeOffered: new Set(),
+    lastKey: null
+  };
+
+  F.getSettings().then((s) => { state.settings = s; });
+  api.storage.onChanged.addListener((changes, area) => {
+    if (area === 'sync' && changes.settings) {
+      F.getSettings().then((s) => { state.settings = s; applyOpacity(); });
+    }
+  });
+
+  /* ---------- video discovery ---------- */
+
+  function videos() {
+    const list = Array.from(document.querySelectorAll('video'));
+    if (state.video && !list.includes(state.video)) list.push(state.video);
+    return list;
+  }
+
+  function pickVideo() {
+    if (state.video) return state.video;
+    let best = null, bestScore = 0;
+    for (const v of videos()) {
+      const r = v.getBoundingClientRect();
+      let score = r.width * r.height;
+      if (!score) continue;
+      if (!v.paused) score *= 4;
+      if (v.readyState > 0) score *= 2;
+      if (score > bestScore) { best = v; bestScore = score; }
+    }
+    return best;
+  }
+
+  function isAd() {
+    return !!document.querySelector('.ad-showing, .ad-interrupting');
+  }
+
+  function pageInfo() {
+    const url = location.href;
+    const title = (document.title || '').replace(/^\(\d+\)\s*/, '').replace(/\s+-\s+YouTube$/, '').trim();
+    return { url, title: title || location.hostname, site: location.hostname.replace(/^www\./, '') };
+  }
+
+  function currentKey() { return F.videoKey(location.href); }
+
+  /* ---------- timecode memory ---------- */
+
+  function savePos(v, force) {
+    if (!v || isAd()) return;
+    const d = v.duration;
+    if (!isFinite(d) || d < 30) return;
+    const now = Date.now();
+    if (!force && now - state.lastSave < 5000) return;
+    state.lastSave = now;
+    const key = currentKey();
+    if (v.currentTime > d - 10) { F.clearPosition(key); return; }
+    if (v.currentTime < 5) return;
+    const info = pageInfo();
+    F.savePosition(key, { t: Math.floor(v.currentTime), d: Math.floor(d), title: info.title, url: info.url });
+  }
+
+  async function offerResume(v) {
+    const key = currentKey();
+    if (!state.settings.autoResume || state.resumeOffered.has(key) || isAd()) return;
+    const pos = await F.getPosition(key);
+    if (!pos || pos.t < 5) return;
+    if (pos.d && pos.t > pos.d - 10) return;
+    if (Math.abs(v.currentTime - pos.t) < 5) return;
+    state.resumeOffered.add(key);
+    showResume(v, pos.t);
+  }
+
+  function hookVideo(v) {
+    if (v.__floatrHooked) return;
+    v.__floatrHooked = true;
+    v.addEventListener('timeupdate', () => savePos(v, false));
+    v.addEventListener('pause', () => savePos(v, true));
+    v.addEventListener('loadedmetadata', () => setTimeout(() => offerResume(v), 800));
+    v.addEventListener('mouseenter', () => showHoverButton(v));
+    v.addEventListener('mousemove', () => showHoverButton(v));
+    if (v.readyState > 0) setTimeout(() => offerResume(v), 800);
+  }
+
+  function scan() {
+    videos().forEach(hookVideo);
+    const key = currentKey();
+    if (key !== state.lastKey) {
+      state.lastKey = key;
+      const v = pickVideo();
+      if (v && v.readyState > 0) setTimeout(() => offerResume(v), 1200);
+    }
+  }
+  scan();
+  new MutationObserver(() => { clearTimeout(scan._t); scan._t = setTimeout(scan, 500); })
+    .observe(document.documentElement, { childList: true, subtree: true });
+  window.addEventListener('pagehide', () => { const v = pickVideo(); if (v) savePos(v, true); });
+
+  // Honour #t=123 links produced by "Copy link with timecode" on generic sites.
+  (function seekFromHash() {
+    const m = /(?:^#|&)t=(\d+)/.exec(location.hash);
+    if (!m) return;
+    const go = () => { const v = pickVideo(); if (v) { v.currentTime = +m[1]; state.resumeOffered.add(currentKey()); } };
+    setTimeout(go, 1500);
+  })();
+
+  /* ---------- in-page overlay (toast, resume bar, hover button) ---------- */
+
+  let overlay = null;
+  function getOverlay() {
+    if (overlay && overlay.host.isConnected) return overlay;
+    const host = document.createElement('floatr-overlay');
+    host.style.cssText = 'all:initial;position:fixed;inset:0 auto auto 0;z-index:2147483647;';
+    const root = host.attachShadow({ mode: 'open' });
+    root.innerHTML = '<style>' + OVERLAY_CSS + '</style><div class="toasts"></div>' +
+      '<button class="hover" type="button" title="' + t('btnFloat') + '">' + ICONS.float + '</button>';
+    document.documentElement.appendChild(host);
+    const hover = root.querySelector('.hover');
+    hover.addEventListener('click', (e) => { e.stopPropagation(); hover.classList.remove('on'); openPlayer(hover._video); });
+    overlay = { host, root, toasts: root.querySelector('.toasts'), hover };
+    return overlay;
+  }
+
+  function toast(text, ms) {
+    if (state.ui && state.mode !== 'native') { state.ui.toast(text); return; }
+    const o = getOverlay();
+    const el = document.createElement('div');
+    el.className = 'toast';
+    el.textContent = text;
+    o.toasts.appendChild(el);
+    setTimeout(() => el.remove(), ms || 2200);
+  }
+
+  function showResume(v, sec) {
+    const o = getOverlay();
+    const el = document.createElement('div');
+    el.className = 'toast resume';
+    const label = document.createElement('span');
+    label.textContent = t('resumeAsk', [F.fmtTime(sec)]);
+    const yes = document.createElement('button');
+    yes.textContent = t('resumeYes');
+    const no = document.createElement('button');
+    no.className = 'ghost';
+    no.textContent = '✕';
+    no.title = t('resumeNo');
+    el.append(label, yes, no);
+    yes.onclick = () => { v.currentTime = sec; v.play().catch(() => {}); el.remove(); };
+    no.onclick = () => el.remove();
+    o.toasts.appendChild(el);
+    setTimeout(() => el.remove(), 15000);
+  }
+
+  function showHoverButton(v) {
+    if (!state.settings.hoverButton || state.mode || document.fullscreenElement) return;
+    const r = v.getBoundingClientRect();
+    if (r.width < 200 || r.height < 120) return;
+    const o = getOverlay();
+    o.hover._video = v;
+    o.hover.style.left = Math.max(4, r.right - 46) + 'px';
+    o.hover.style.top = Math.max(4, r.top + 10) + 'px';
+    o.hover.classList.add('on');
+    clearTimeout(o.hover._t);
+    o.hover._t = setTimeout(() => o.hover.classList.remove('on'), 2500);
+  }
+
+  /* ---------- quick controls ---------- */
+
+  function setSpeed(v, rate) {
+    rate = Math.min(F.SPEED_MAX, Math.max(F.SPEED_MIN, Math.round(rate * 100) / 100));
+    v.playbackRate = rate;
+    toast(t('speedIs', [rate + '×']));
+    state.ui && state.ui.refresh();
+    return rate;
+  }
+  function stepSpeed(v, dir) {
+    return setSpeed(v, v.playbackRate + dir * 0.25);
+  }
+  function setVolume(v, vol) {
+    v.volume = vol;
+    v.muted = vol === 0;
+    toast(t('volumeIs', [Math.round(vol * 100) + '%']));
+    state.ui && state.ui.refresh();
+  }
+  function cycleVolume(v) {
+    const cur = v.muted ? 0 : v.volume;
+    const p = F.VOLUME_PRESETS;
+    const next = p.find((x) => x > cur + 0.01);
+    setVolume(v, next === undefined ? p[0] : next);
+  }
+
+  async function bookmark(v, note) {
+    const info = pageInfo();
+    await F.addBookmark(currentKey(), info, v.currentTime, note);
+    toast(t('bookmarkSaved', [F.fmtTime(v.currentTime)]));
+  }
+
+  function linkAt(v) {
+    return F.timeLink(location.href, v.currentTime);
+  }
+
+  /* ---------- floating player ---------- */
+
+  async function openPlayer(v) {
+    v = v || pickVideo();
+    if (!v) { toast(t('noVideo')); return { ok: false, error: 'noVideo' }; }
+    if (state.mode) { closePlayer(); return { ok: true, mode: null }; }
+    if (window.documentPictureInPicture && top === window) {
+      try { await openDocPip(v); return { ok: true, mode: 'docpip' }; } catch (e) { /* fall through */ }
+    }
+    if (document.pictureInPictureEnabled && !v.disablePictureInPicture && !window.documentPictureInPicture) {
+      try {
+        await v.requestPictureInPicture();
+        state.mode = 'native';
+        state.video = v;
+        v.addEventListener('leavepictureinpicture', () => { state.mode = null; state.video = null; }, { once: true });
+        return { ok: true, mode: 'native' };
+      } catch (e) { /* fall through */ }
+    }
+    openFloat(v);
+    return { ok: true, mode: 'float' };
+  }
+
+  function detachVideo(v) {
+    state.video = v;
+    state.origStyle = v.getAttribute('style');
+    state.origControls = v.controls;
+    v.controls = false;
+    if (overlay) overlay.hover.classList.remove('on');
+    state.placeholder = document.createElement('div');
+    const r = v.getBoundingClientRect();
+    state.placeholder.style.cssText = 'width:' + r.width + 'px;height:' + r.height + 'px;background:#000;';
+    v.parentNode.insertBefore(state.placeholder, v);
+    const css = 'position:absolute;inset:0;width:100%;height:100%;left:0;top:0;object-fit:contain;' +
+      'transform:none;max-width:none;max-height:none;margin:0;';
+    css.split(';').filter(Boolean).forEach((rule) => {
+      const i = rule.indexOf(':');
+      v.style.setProperty(rule.slice(0, i), rule.slice(i + 1), 'important');
+    });
+  }
+
+  function reattachVideo() {
+    const v = state.video;
+    if (!v || !state.placeholder) return;
+    const wasPlaying = !v.paused;
+    state.placeholder.replaceWith(v);
+    if (state.origStyle == null) v.removeAttribute('style'); else v.setAttribute('style', state.origStyle);
+    v.controls = state.origControls;
+    if (wasPlaying) v.play().catch(() => {});
+    state.placeholder = null;
+  }
+
+  async function openDocPip(v) {
+    const r = v.getBoundingClientRect();
+    const ratio = (v.videoWidth && v.videoHeight) ? v.videoHeight / v.videoWidth : (r.height / r.width || 9 / 16);
+    const width = 560;
+    const pw = await window.documentPictureInPicture.requestWindow({ width, height: Math.round(width * ratio) });
+    const wasPlaying = !v.paused;
+    detachVideo(v);
+    state.mode = 'docpip';
+    state.pipWindow = pw;
+    const style = pw.document.createElement('style');
+    style.textContent = PLAYER_CSS + 'html,body{margin:0;height:100%;background:#000;overflow:hidden}';
+    pw.document.head.appendChild(style);
+    pw.document.title = 'Floatr';
+    state.ui = buildPlayer(pw.document, pw.document.body, v, pw);
+    if (wasPlaying) v.play().catch(() => {});
+    pw.addEventListener('pagehide', () => teardown());
+    applyOpacity();
+  }
+
+  function openFloat(v) {
+    const wasPlaying = !v.paused;
+    detachVideo(v);
+    state.mode = 'float';
+    const host = document.createElement('floatr-player');
+    host.style.cssText = 'all:initial;position:fixed;right:24px;bottom:24px;z-index:2147483647;';
+    const root = host.attachShadow({ mode: 'open' });
+    const style = document.createElement('style');
+    style.textContent = PLAYER_CSS +
+      ':host{display:block}.frame{width:420px;height:236px;min-width:220px;min-height:124px;resize:both;overflow:hidden;' +
+      'border-radius:12px;box-shadow:0 12px 40px rgba(0,0,0,.45);background:#000;position:relative}';
+    root.appendChild(style);
+    const frame = document.createElement('div');
+    frame.className = 'frame';
+    root.appendChild(frame);
+    document.documentElement.appendChild(host);
+    state.floatHost = host;
+    state.ui = buildPlayer(document, frame, v, window, true);
+    makeDraggable(host, state.ui.dragHandle);
+    if (wasPlaying) v.play().catch(() => {});
+    applyOpacity();
+  }
+
+  function makeDraggable(host, handle) {
+    let sx, sy, ox, oy;
+    handle.addEventListener('pointerdown', (e) => {
+      if (e.target.closest('button,input')) return;
+      const r = host.getBoundingClientRect();
+      sx = e.clientX; sy = e.clientY; ox = r.left; oy = r.top;
+      handle.setPointerCapture(e.pointerId);
+      const move = (ev) => {
+        host.style.left = Math.max(0, Math.min(innerWidth - 80, ox + ev.clientX - sx)) + 'px';
+        host.style.top = Math.max(0, Math.min(innerHeight - 40, oy + ev.clientY - sy)) + 'px';
+        host.style.right = 'auto';
+        host.style.bottom = 'auto';
+      };
+      const up = () => { handle.removeEventListener('pointermove', move); handle.removeEventListener('pointerup', up); };
+      handle.addEventListener('pointermove', move);
+      handle.addEventListener('pointerup', up);
+    });
+  }
+
+  function closePlayer() {
+    if (state.mode === 'native') { document.exitPictureInPicture().catch(() => {}); return; }
+    if (state.mode === 'docpip' && state.pipWindow) { state.pipWindow.close(); return; }
+    teardown();
+  }
+
+  function teardown() {
+    if (!state.mode) return;
+    if (state.subsObserver) state.subsObserver.disconnect();
+    state.subsObserver = null;
+    reattachVideo();
+    if (state.floatHost) state.floatHost.remove();
+    state.floatHost = null;
+    state.pipWindow = null;
+    state.ui = null;
+    state.mode = null;
+    state.video = null;
+  }
+
+  function applyOpacity() {
+    const o = Math.min(100, Math.max(30, state.settings.opacity)) / 100;
+    if (state.mode === 'docpip' && state.pipWindow) state.pipWindow.document.body.style.opacity = o;
+    if (state.mode === 'float' && state.floatHost) state.floatHost.style.opacity = o;
+    state.ui && state.ui.refresh();
+  }
+
+  // Site subtitle containers that live outside the <video> element.
+  const SUB_SELECTORS = [
+    '.ytp-caption-window-container', '.player-timedtext', '.vjs-text-track-display',
+    '.plyr__captions', '.jw-captions', '.shaka-text-container', '[data-testid="cueBoxRowTextCue"]',
+    '.dv-player-fullscreen [class*="captions"]', '[class*="subtitle"]', '[class*="caption"]'
+  ];
+
+  function overlaps(el) {
+    const a = el.getBoundingClientRect(), b = state.placeholder.getBoundingClientRect();
+    if (!a.width && !a.height) return el.closest('.html5-video-player, [class*="player"]') !== null;
+    return a.left < b.right && a.right > b.left && a.top < b.bottom && a.bottom > b.top;
+  }
+
+  function findSubtitleSource() {
+    let node = state.placeholder && state.placeholder.parentElement;
+    for (let i = 0; node && i < 6; i++, node = node.parentElement) {
+      for (const sel of SUB_SELECTORS) {
+        const el = node.querySelector(sel);
+        if (el && el !== state.placeholder && !el.contains(state.placeholder) && overlaps(el)) return el;
+      }
+    }
+    return null;
+  }
+
+  function mirrorSubtitles(target) {
+    let src = findSubtitleSource();
+    const render = () => {
+      if (!src || !src.isConnected) src = findSubtitleSource();
+      const text = src ? src.innerText.trim() : '';
+      if (target.textContent !== text) {
+        target.textContent = text;
+        target.style.display = text ? '' : 'none';
+      }
+    };
+    let queued = false;
+    state.subsObserver = new MutationObserver(() => {
+      if (queued) return;
+      queued = true;
+      requestAnimationFrame(() => { queued = false; render(); });
+    });
+    state.subsObserver.observe(document.body, { childList: true, subtree: true, characterData: true });
+    render();
+  }
+
+  function buildPlayer(doc, mount, v, win, inPage) {
+    const b = state.settings.buttons;
+    const wrap = doc.createElement('div');
+    wrap.className = 'fl-root';
+    wrap.appendChild(v);
+    const subs = doc.createElement('div');
+    subs.className = 'fl-subs';
+    subs.style.display = 'none';
+    const toastEl = doc.createElement('div');
+    toastEl.className = 'fl-toast';
+    const bar = doc.createElement('div');
+    bar.className = 'fl-bar';
+    wrap.append(subs, toastEl, bar);
+    mount.appendChild(wrap);
+
+    const btn = (icon, title, fn, show) => {
+      if (show === false) return null;
+      const el = doc.createElement('button');
+      el.type = 'button';
+      el.title = title;
+      el.innerHTML = icon;
+      el.addEventListener('click', (e) => { e.stopPropagation(); fn(el); });
+      bar.appendChild(el);
+      return el;
+    };
+    const label = (cls, title, fn, show) => {
+      if (show === false) return null;
+      const el = doc.createElement('button');
+      el.type = 'button';
+      el.className = 'fl-label ' + cls;
+      el.title = title;
+      el.addEventListener('click', (e) => { e.stopPropagation(); fn(); });
+      bar.appendChild(el);
+      return el;
+    };
+
+    const playBtn = btn(ICONS.play, t('btnPlay'), () => { v.paused ? v.play() : v.pause(); }, b.play);
+    btn(ICONS.back, t('btnBack'), () => { v.currentTime = Math.max(0, v.currentTime - 10); }, b.seek);
+    btn(ICONS.fwd, t('btnForward'), () => { v.currentTime += 10; }, b.seek);
+    btn(ICONS.slower, t('btnSlower'), () => stepSpeed(v, -1), b.speed);
+    const speedLbl = label('speed', t('btnSpeedReset'), () => setSpeed(v, 1), b.speed);
+    btn(ICONS.faster, t('btnFaster'), () => stepSpeed(v, 1), b.speed);
+    const volLbl = label('vol', t('btnVolume'), () => cycleVolume(v), b.volume);
+    const spacer = doc.createElement('span');
+    spacer.className = 'fl-spacer';
+    bar.appendChild(spacer);
+    btn(ICONS.bookmark, t('btnBookmark'), () => {
+      const note = win.prompt(t('notePrompt', [F.fmtTime(v.currentTime)]), '');
+      if (note !== null) bookmark(v, note);
+    }, b.bookmark);
+    btn(ICONS.link, t('btnCopyLink'), () => {
+      win.navigator.clipboard.writeText(linkAt(v)).then(() => ui.toast(t('linkCopied')), () => ui.toast(linkAt(v)));
+    }, b.link);
+    let range = null;
+    if (b.opacity) {
+      range = doc.createElement('input');
+      range.type = 'range';
+      range.min = 30; range.max = 100; range.step = 5;
+      range.title = t('opacity');
+      range.className = 'fl-range';
+      range.addEventListener('input', () => {
+        state.settings.opacity = +range.value;
+        applyOpacity();
+      });
+      range.addEventListener('change', () => F.saveSettings({ opacity: +range.value }));
+      range.addEventListener('pointerdown', (e) => e.stopPropagation());
+      bar.appendChild(range);
+    }
+    btn(ICONS.close, t('btnClose'), () => closePlayer());
+
+    let toastTimer;
+    const ui = {
+      dragHandle: wrap,
+      toast(text) {
+        toastEl.textContent = text;
+        toastEl.classList.add('on');
+        clearTimeout(toastTimer);
+        toastTimer = setTimeout(() => toastEl.classList.remove('on'), 1600);
+      },
+      refresh() {
+        if (playBtn) playBtn.innerHTML = v.paused ? ICONS.play : ICONS.pause;
+        if (speedLbl) speedLbl.textContent = v.playbackRate + '×';
+        if (volLbl) volLbl.textContent = (v.muted ? 0 : Math.round(v.volume * 100)) + '%';
+        if (range) range.value = state.settings.opacity;
+      }
+    };
+    ['play', 'pause', 'ratechange', 'volumechange'].forEach((ev) => v.addEventListener(ev, () => state.ui === ui && ui.refresh()));
+    wrap.addEventListener('dblclick', (e) => { if (!e.target.closest('.fl-bar')) { v.paused ? v.play() : v.pause(); } });
+    if (inPage) wrap.tabIndex = 0;
+    (inPage ? wrap : win).addEventListener('keydown', (e) => {
+      if (e.target.tagName === 'INPUT') return;
+      if (e.key === ' ') { e.preventDefault(); v.paused ? v.play() : v.pause(); }
+      else if (e.key === 'ArrowLeft') v.currentTime -= 5;
+      else if (e.key === 'ArrowRight') v.currentTime += 5;
+      else if (e.key === '>' || (e.shiftKey && e.key === '.')) stepSpeed(v, 1);
+      else if (e.key === '<' || (e.shiftKey && e.key === ',')) stepSpeed(v, -1);
+    });
+    if (!inPage) wrap.style.height = '100%';
+    mirrorSubtitles(subs);
+    ui.refresh();
+    return ui;
+  }
+
+  /* ---------- keyboard + messages ---------- */
+
+  document.addEventListener('keydown', (e) => {
+    if (e.altKey && e.shiftKey && e.code === 'KeyP') {
+      const v = pickVideo();
+      if (v) { e.preventDefault(); openPlayer(v); }
+    }
+  }, true);
+
+  function status(v) {
+    const key = currentKey();
+    return F.getBookmarks(key).then((bm) => ({
+      ok: true,
+      key,
+      info: pageInfo(),
+      time: v.currentTime,
+      duration: isFinite(v.duration) ? v.duration : 0,
+      rate: v.playbackRate,
+      volume: v.muted ? 0 : v.volume,
+      paused: v.paused,
+      floating: state.mode,
+      bookmarks: bm ? bm.items : [],
+      link: linkAt(v),
+      docPip: !!window.documentPictureInPicture
+    }));
+  }
+
+  function handle(msg) {
+    const v = pickVideo();
+    if (!v) return null;
+    switch (msg.type) {
+      case 'status': return status(v);
+      case 'pip': return openPlayer(v);
+      case 'bookmark': return bookmark(v, msg.note).then(() => status(v));
+      case 'speed': setSpeed(v, msg.value != null ? msg.value : v.playbackRate + msg.delta); return status(v);
+      case 'volume': setVolume(v, msg.value); return status(v);
+      case 'seek': v.currentTime = msg.t; return status(v);
+      case 'unbookmark': return F.removeBookmark(currentKey(), msg.index).then(() => status(v));
+      case 'command':
+        if (msg.command === 'speed-up') stepSpeed(v, 1);
+        else if (msg.command === 'speed-down') stepSpeed(v, -1);
+        else if (msg.command === 'add-bookmark') bookmark(v, '');
+        return Promise.resolve({ ok: true });
+    }
+    return null;
+  }
+
+  api.runtime.onMessage.addListener((msg, sender, sendResponse) => {
+    const p = handle(msg);
+    if (!p) return false;
+    Promise.resolve(p).then(sendResponse, (e) => sendResponse({ ok: false, error: String(e) }));
+    return true;
+  });
+
+  /* ---------- assets ---------- */
+
+  const svg = (d) => '<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">' + d + '</svg>';
+  const ICONS = {
+    float: svg('<rect x="2" y="4" width="20" height="16" rx="3"/><rect x="12" y="11" width="8" height="7" rx="1.5" fill="currentColor"/>'),
+    play: svg('<path d="M7 5l12 7-12 7z" fill="currentColor"/>'),
+    pause: svg('<path d="M8 5v14M16 5v14"/>'),
+    back: svg('<path d="M11 7l-5 5 5 5M18 7l-5 5 5 5"/>'),
+    fwd: svg('<path d="M13 7l5 5-5 5M6 7l5 5-5 5"/>'),
+    slower: svg('<path d="M5 12h14"/>'),
+    faster: svg('<path d="M12 5v14M5 12h14"/>'),
+    bookmark: svg('<path d="M6 3h12v18l-6-4-6 4z"/>'),
+    link: svg('<path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7l-1 1"/><path d="M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1-1"/>'),
+    close: svg('<path d="M6 6l12 12M18 6L6 18"/>')
+  };
+
+  const OVERLAY_CSS = `
+    .toasts{position:fixed;left:50%;bottom:32px;transform:translateX(-50%);display:flex;flex-direction:column;gap:8px;align-items:center;font:500 14px/1.4 system-ui,-apple-system,"Segoe UI",sans-serif}
+    .toast{background:rgba(17,20,28,.94);color:#fff;padding:10px 16px;border-radius:12px;box-shadow:0 8px 28px rgba(0,0,0,.35);display:flex;gap:10px;align-items:center;animation:in .18s ease-out}
+    .toast button{font:inherit;border:0;border-radius:8px;padding:6px 12px;background:#2dd4bf;color:#06201d;cursor:pointer;font-weight:600}
+    .toast button.ghost{background:transparent;color:#cbd5e1;padding:6px 8px}
+    .hover{position:fixed;width:36px;height:36px;border:0;border-radius:10px;background:rgba(17,20,28,.8);color:#2dd4bf;cursor:pointer;display:grid;place-items:center;opacity:0;pointer-events:none;transition:opacity .15s}
+    .hover.on{opacity:1;pointer-events:auto}
+    .hover:hover{background:rgba(17,20,28,.95)}
+    @keyframes in{from{opacity:0;transform:translateY(6px)}}`;
+
+  const PLAYER_CSS = `
+    .fl-root{position:relative;width:100%;height:100%;background:#000;overflow:hidden;font:500 13px/1.3 system-ui,-apple-system,"Segoe UI",sans-serif;color:#fff;cursor:grab}
+    .fl-subs{position:absolute;left:50%;bottom:52px;transform:translateX(-50%);max-width:90%;text-align:center;white-space:pre-line;background:rgba(0,0,0,.72);padding:4px 10px;border-radius:6px;font-size:clamp(13px,3.4vw,22px);pointer-events:none;z-index:2}
+    .fl-toast{position:absolute;top:10px;left:50%;transform:translateX(-50%);background:rgba(17,20,28,.9);padding:6px 12px;border-radius:8px;opacity:0;transition:opacity .15s;pointer-events:none;z-index:4}
+    .fl-toast.on{opacity:1}
+    .fl-bar{position:absolute;left:0;right:0;bottom:0;display:flex;align-items:center;gap:2px;padding:6px 8px;background:linear-gradient(transparent,rgba(0,0,0,.8));opacity:0;transition:opacity .2s;z-index:3}
+    .fl-root:hover .fl-bar{opacity:1}
+    .fl-bar button{border:0;background:transparent;color:#fff;width:30px;height:30px;border-radius:8px;cursor:pointer;display:grid;place-items:center;padding:0;font:inherit}
+    .fl-bar button:hover{background:rgba(255,255,255,.16);color:#2dd4bf}
+    .fl-bar .fl-label{width:auto;min-width:38px;padding:0 6px;font-variant-numeric:tabular-nums}
+    .fl-spacer{flex:1}
+    .fl-range{width:70px;accent-color:#2dd4bf;cursor:pointer}`;
+})();

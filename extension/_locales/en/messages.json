@@ -1,0 +1,158 @@
+{
+  "extName": {
+    "message": "Floatr — floating video player"
+  },
+  "extDescription": {
+    "message": "Floating video player with timecode memory, subtitles, frame notes, Markdown export, shadow mode and quick sound control."
+  },
+  "cmdSpeedUp": {
+    "message": "Increase playback speed"
+  },
+  "cmdSpeedDown": {
+    "message": "Decrease playback speed"
+  },
+  "cmdBookmark": {
+    "message": "Bookmark the current moment"
+  },
+  "btnFloat": {
+    "message": "Float video"
+  },
+  "btnUnfloat": {
+    "message": "Return video to page"
+  },
+  "resumeAsk": {
+    "message": "Continue from $1?"
+  },
+  "resumeYes": {
+    "message": "Continue"
+  },
+  "resumeNo": {
+    "message": "Start over"
+  },
+  "noVideo": {
+    "message": "No video found on this page"
+  },
+  "speedIs": {
+    "message": "Speed: $1"
+  },
+  "volumeIs": {
+    "message": "Volume: $1"
+  },
+  "bookmarkSaved": {
+    "message": "Bookmark saved at $1"
+  },
+  "btnPlay": {
+    "message": "Play / pause"
+  },
+  "btnBack": {
+    "message": "Back 10 s"
+  },
+  "btnForward": {
+    "message": "Forward 10 s"
+  },
+  "btnSlower": {
+    "message": "Slower"
+  },
+  "btnSpeedReset": {
+    "message": "Reset speed to 1×"
+  },
+  "btnFaster": {
+    "message": "Faster"
+  },
+  "btnVolume": {
+    "message": "Volume preset"
+  },
+  "btnBookmark": {
+    "message": "Bookmark with note"
+  },
+  "notePrompt": {
+    "message": "Note for $1 (optional):"
+  },
+  "btnCopyLink": {
+    "message": "Copy link with timecode"
+  },
+  "linkCopied": {
+    "message": "Link copied"
+  },
+  "opacity": {
+    "message": "Opacity"
+  },
+  "btnClose": {
+    "message": "Close"
+  },
+  "popupNoVideo": {
+    "message": "Open a page with a video to use Floatr. Videos inside other extensions and browser pages are not available."
+  },
+  "pipHint": {
+    "message": "The browser blocked the floating window. Click the video once, then press Alt+Shift+P or use the button on the video."
+  },
+  "notePlaceholder": {
+    "message": "Note to this frame (optional)"
+  },
+  "speed": {
+    "message": "Speed"
+  },
+  "volume": {
+    "message": "Volume"
+  },
+  "bookmarks": {
+    "message": "Bookmarks"
+  },
+  "bookmarksEmpty": {
+    "message": "No bookmarks yet"
+  },
+  "exportThis": {
+    "message": "Export this video"
+  },
+  "exportAll": {
+    "message": "Export all"
+  },
+  "settings": {
+    "message": "Settings"
+  },
+  "setAutoResume": {
+    "message": "Offer to continue where I stopped"
+  },
+  "setHoverButton": {
+    "message": "Show float button over videos"
+  },
+  "setButtons": {
+    "message": "Player buttons:"
+  },
+  "website": {
+    "message": "Website"
+  },
+  "support": {
+    "message": "Support"
+  },
+  "jumpTo": {
+    "message": "Jump to this moment"
+  },
+  "delete": {
+    "message": "Delete"
+  },
+  "mdHeading": {
+    "message": "Floatr bookmarks"
+  },
+  "btnGroup_play": {
+    "message": "Play"
+  },
+  "btnGroup_seek": {
+    "message": "Seek ±10 s"
+  },
+  "btnGroup_speed": {
+    "message": "Speed"
+  },
+  "btnGroup_volume": {
+    "message": "Volume"
+  },
+  "btnGroup_bookmark": {
+    "message": "Bookmark"
+  },
+  "btnGroup_link": {
+    "message": "Link"
+  },
+  "btnGroup_opacity": {
+    "message": "Opacity"
+  }
+}

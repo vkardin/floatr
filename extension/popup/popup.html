@@ -1,0 +1,79 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Floatr</title>
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <header class="head">
+    <img src="../icons/icon32.png" width="24" height="24" alt="">
+    <strong>Floatr</strong>
+    <span class="ver" id="ver"></span>
+  </header>
+
+  <section id="empty" class="empty" hidden>
+    <p data-i18n="popupNoVideo"></p>
+  </section>
+
+  <main id="main" hidden>
+    <div class="now">
+      <div class="title" id="title"></div>
+      <div class="time" id="time"></div>
+    </div>
+
+    <button class="primary" id="pip" data-i18n="btnFloat"></button>
+    <p class="hint" id="pipHint" data-i18n="pipHint" hidden></p>
+
+    <div class="row">
+      <button id="copy" data-i18n="btnCopyLink"></button>
+      <button id="markBtn" data-i18n="btnBookmark"></button>
+    </div>
+    <textarea id="note" rows="2" data-i18n-ph="notePlaceholder"></textarea>
+
+    <div class="group">
+      <div class="label"><span data-i18n="speed"></span><output id="speedOut"></output></div>
+      <div class="chips" id="speeds"></div>
+    </div>
+
+    <div class="group">
+      <div class="label"><span data-i18n="volume"></span><output id="volOut"></output></div>
+      <div class="chips" id="volumes"></div>
+    </div>
+
+    <div class="group">
+      <div class="label"><span data-i18n="opacity"></span><output id="opOut"></output></div>
+      <input type="range" id="opacity" min="30" max="100" step="5">
+    </div>
+
+    <div class="group">
+      <div class="label"><span data-i18n="bookmarks"></span><span class="count" id="bmCount"></span></div>
+      <ul class="bms" id="bms"></ul>
+      <p class="muted" id="bmEmpty" data-i18n="bookmarksEmpty"></p>
+    </div>
+  </main>
+
+  <div class="row">
+    <button id="exportThis" data-i18n="exportThis"></button>
+    <button id="exportAll" data-i18n="exportAll"></button>
+  </div>
+
+  <details class="settings">
+    <summary data-i18n="settings"></summary>
+    <label><input type="checkbox" id="autoResume"> <span data-i18n="setAutoResume"></span></label>
+    <label><input type="checkbox" id="hoverButton"> <span data-i18n="setHoverButton"></span></label>
+    <p class="muted" data-i18n="setButtons"></p>
+    <div id="btnToggles" class="toggles"></div>
+  </details>
+
+  <footer class="foot">
+    <a href="https://vkardin.github.io/stash/" target="_blank" rel="noopener" data-i18n="website"></a>
+    <span>·</span>
+    <a href="https://vkardin.github.io/stash/support.html" target="_blank" rel="noopener" data-i18n="support"></a>
+  </footer>
+
+  <script src="../shared/store.js"></script>
+  <script src="popup.js"></script>
+</body>
+</html>
