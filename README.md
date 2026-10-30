@@ -9,9 +9,9 @@
 </p>
 
 <p align="center">
-  <a href="https://github.com/vkardin/stash/releases"><img src="https://img.shields.io/badge/Chrome-extension-0d9488?logo=googlechrome&logoColor=white" alt="Chrome"></a>
-  <a href="https://github.com/vkardin/stash/releases"><img src="https://img.shields.io/badge/Firefox-add--on-0d9488?logo=firefoxbrowser&logoColor=white" alt="Firefox"></a>
-  <a href="https://vkardin.github.io/stash/"><img src="https://img.shields.io/badge/Website-floatr-0d9488" alt="Website"></a>
+  <a href="https://github.com/vkardin/floatr/releases"><img src="https://img.shields.io/badge/Chrome-extension-0d9488?logo=googlechrome&logoColor=white" alt="Chrome"></a>
+  <a href="https://github.com/vkardin/floatr/releases"><img src="https://img.shields.io/badge/Firefox-add--on-0d9488?logo=firefoxbrowser&logoColor=white" alt="Firefox"></a>
+  <a href="https://vkardin.github.io/floatr/"><img src="https://img.shields.io/badge/Website-floatr-0d9488" alt="Website"></a>
   <a href="LICENSE"><img src="https://img.shields.io/badge/License-MIT-0d9488" alt="MIT"></a>
 </p>
 
@@ -47,15 +47,15 @@ Global shortcuts can be changed at `chrome://extensions/shortcuts` (Firefox: *Ma
 
 **Manual install from Releases:**
 
-1. Download `floatr-chrome-<version>.zip` or `floatr-firefox-<version>.zip` from [Releases](https://github.com/vkardin/stash/releases).
+1. Download `floatr-chrome-<version>.zip` or `floatr-firefox-<version>.zip` from [Releases](https://github.com/vkardin/floatr/releases).
 2. Chrome, Edge, Brave, Opera: unzip the archive, open `chrome://extensions`, turn on *Developer mode*, click *Load unpacked* and pick the unzipped folder.
 3. Firefox: open `about:debugging#/runtime/this-firefox`, click *Load Temporary Add-on* and pick the zip (or `manifest.json` inside it).
 
 **From source:**
 
 ```bash
-git clone https://github.com/vkardin/stash.git
-cd stash
+git clone https://github.com/vkardin/floatr.git
+cd floatr
 python3 tools/build.py        # dist/floatr-chrome-1.0.0.zip, dist/floatr-firefox-1.0.0.zip
 ```
 
@@ -70,11 +70,11 @@ For development, load the `extension/` folder directly with *Load unpacked*.
 
 ## Privacy
 
-Floatr works entirely in your browser. Settings and bookmarks are kept in browser sync storage, playback positions in local storage. There are no servers, no analytics and no trackers. Details: [privacy policy](https://vkardin.github.io/stash/privacy.html).
+Floatr works entirely in your browser. Settings and bookmarks are kept in browser sync storage, playback positions in local storage. There are no servers, no analytics and no trackers. Details: [privacy policy](https://vkardin.github.io/floatr/privacy.html).
 
 ## Feedback and support
 
-Found a bug or have an idea? Open an [issue](https://github.com/vkardin/stash/issues/new/choose). If Floatr saves you time, you can [support the project](https://vkardin.github.io/stash/#donate).
+Found a bug or have an idea? Open an [issue](https://github.com/vkardin/floatr/issues/new/choose). If Floatr saves you time, you can [support the project](https://vkardin.github.io/floatr/#donate).
 
 ## Repository
 

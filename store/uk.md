@@ -8,7 +8,7 @@ Use the same texts for Chrome Web Store, Firefox Add-ons and Opera Addons.
 | Firefox Add-ons | Photos, Music & Videos | 250 characters (summary) |
 | Opera Addons | Productivity | 132 characters |
 
-Website: https://vkardin.github.io/stash/ · Support: https://vkardin.github.io/stash/support.html · Privacy policy: https://vkardin.github.io/stash/privacy.html
+Website: https://vkardin.github.io/floatr/ · Support: https://vkardin.github.io/floatr/support.html · Privacy policy: https://vkardin.github.io/floatr/privacy.html
 
 ## Short description
 

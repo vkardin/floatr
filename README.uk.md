@@ -9,9 +9,9 @@
 </p>
 
 <p align="center">
-  <a href="https://github.com/vkardin/stash/releases"><img src="https://img.shields.io/badge/Chrome-extension-0d9488?logo=googlechrome&logoColor=white" alt="Chrome"></a>
-  <a href="https://github.com/vkardin/stash/releases"><img src="https://img.shields.io/badge/Firefox-add--on-0d9488?logo=firefoxbrowser&logoColor=white" alt="Firefox"></a>
-  <a href="https://vkardin.github.io/stash/"><img src="https://img.shields.io/badge/Website-floatr-0d9488" alt="Сайт"></a>
+  <a href="https://github.com/vkardin/floatr/releases"><img src="https://img.shields.io/badge/Chrome-extension-0d9488?logo=googlechrome&logoColor=white" alt="Chrome"></a>
+  <a href="https://github.com/vkardin/floatr/releases"><img src="https://img.shields.io/badge/Firefox-add--on-0d9488?logo=firefoxbrowser&logoColor=white" alt="Firefox"></a>
+  <a href="https://vkardin.github.io/floatr/"><img src="https://img.shields.io/badge/Website-floatr-0d9488" alt="Сайт"></a>
   <a href="LICENSE"><img src="https://img.shields.io/badge/License-MIT-0d9488" alt="MIT"></a>
 </p>
 
@@ -47,15 +47,15 @@ Floatr виносить будь-яке веб-відео у плаваюче в
 
 **Вручну з Releases:**
 
-1. Завантажте `floatr-chrome-<версія>.zip` або `floatr-firefox-<версія>.zip` з [Releases](https://github.com/vkardin/stash/releases).
+1. Завантажте `floatr-chrome-<версія>.zip` або `floatr-firefox-<версія>.zip` з [Releases](https://github.com/vkardin/floatr/releases).
 2. Chrome, Edge, Brave, Opera: розпакуйте архів, відкрийте `chrome://extensions`, увімкніть *Режим розробника*, натисніть *Завантажити розпаковане* та оберіть теку.
 3. Firefox: відкрийте `about:debugging#/runtime/this-firefox`, натисніть *Завантажити тимчасовий додаток* і оберіть zip.
 
 **З вихідного коду:**
 
 ```bash
-git clone https://github.com/vkardin/stash.git
-cd stash
+git clone https://github.com/vkardin/floatr.git
+cd floatr
 python3 tools/build.py        # dist/floatr-chrome-1.0.0.zip, dist/floatr-firefox-1.0.0.zip
 ```
 
@@ -70,11 +70,11 @@ python3 tools/build.py        # dist/floatr-chrome-1.0.0.zip, dist/floatr-firefo
 
 ## Приватність
 
-Floatr працює повністю в браузері. Налаштування та закладки зберігаються в синхронізованому сховищі браузера, позиції перегляду в локальному. Жодних серверів, аналітики й трекерів. Докладніше: [політика конфіденційності](https://vkardin.github.io/stash/privacy.html).
+Floatr працює повністю в браузері. Налаштування та закладки зберігаються в синхронізованому сховищі браузера, позиції перегляду в локальному. Жодних серверів, аналітики й трекерів. Докладніше: [політика конфіденційності](https://vkardin.github.io/floatr/privacy.html).
 
 ## Зворотний зв'язок і підтримка
 
-Знайшли помилку чи маєте ідею? Створіть [issue](https://github.com/vkardin/stash/issues/new/choose). Якщо Floatr заощаджує вам час, можна [підтримати проєкт](https://vkardin.github.io/stash/#donate).
+Знайшли помилку чи маєте ідею? Створіть [issue](https://github.com/vkardin/floatr/issues/new/choose). Якщо Floatr заощаджує вам час, можна [підтримати проєкт](https://vkardin.github.io/floatr/#donate).
 
 ## Репозиторій
 
