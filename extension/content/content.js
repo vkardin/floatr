@@ -244,6 +244,8 @@
     state.origControls = v.controls;
     v.controls = false;
     if (overlay) overlay.hover.classList.remove('on');
+    // Marks the video as taken, so ambient-light extensions such as Video Glow leave it alone.
+    v.setAttribute('data-video-drift', 'floating');
     state.placeholder = document.createElement('div');
     const r = v.getBoundingClientRect();
     state.placeholder.style.cssText = 'width:' + r.width + 'px;height:' + r.height + 'px;background:#000;';
@@ -257,6 +259,7 @@
     if (!v || !state.placeholder) return;
     const wasPlaying = !v.paused;
     state.placeholder.replaceWith(v);
+    v.removeAttribute('data-video-drift');
     v.controls = state.origControls;
     if (wasPlaying) v.play().catch(() => {});
     state.placeholder = null;
@@ -270,6 +273,16 @@
     const width = Math.round(Math.min(640, avail * 0.42));
     const height = Math.round(Math.min(width * ratio, (screen.availHeight || 800) * 0.7));
     const pw = await window.documentPictureInPicture.requestWindow({ width, height, preferInitialWindowPlacement: true });
+    try { fillDocPip(v, pw, ratio); } catch (e) {
+      // Never leave an empty black window behind; the caller falls back to the page player.
+      try { reattachVideo(); } catch (e2) { /* ignore */ }
+      state.mode = null; state.pipWindow = null; state.fitWindow = null; state.ui = null;
+      try { pw.close(); } catch (e2) { /* ignore */ }
+      throw e;
+    }
+  }
+
+  function fillDocPip(v, pw, ratio) {
     const wasPlaying = !v.paused;
     detachVideo(v);
     state.mode = 'docpip';
@@ -285,17 +298,25 @@
     // remembers for the site, so the window can come out with a different shape than the video.
     // fit() trims whichever side is too long; it only shrinks, so it never runs into that cap.
     // Resizing is allowed only during a user gesture, so it also runs on every click or key press.
-    const fit = () => {
+    const gap = () => {
       const vr = (v.videoWidth && v.videoHeight) ? v.videoHeight / v.videoWidth : ratio;
       const iw = pw.innerWidth, ih = pw.innerHeight;
-      if (!iw || !ih) return false;
+      if (!iw || !ih) return null;
       let w = iw, h = Math.round(iw * vr);
       if (h > ih) { h = ih; w = Math.round(ih / vr); }
       const dw = w - iw, dh = h - ih;
-      if (Math.abs(dw) <= 4 && Math.abs(dh) <= 4) return true;
-      try { pw.resizeTo(pw.outerWidth + dw, pw.outerHeight + dh); return true; } catch (e) { return false; }
+      return (Math.abs(dw) <= 4 && Math.abs(dh) <= 4) ? null : [dw, dh];
     };
-    state.fitWindow = fit;
+    const fit = () => {
+      const d = gap();
+      if (!d) return;
+      try { pw.resizeTo(pw.outerWidth + d[0], pw.outerHeight + d[1]); } catch (e) { /* needs a click */ }
+    };
+    // The fit button also says so when the browser refused to change the window.
+    state.fitWindow = () => {
+      fit();
+      setTimeout(() => { if (state.pipWindow === pw && gap() && state.ui) state.ui.toast(t('fitBlocked')); }, 400);
+    };
     fit();
     pw.addEventListener('pointerdown', fit, true);
     pw.addEventListener('keydown', fit, true);

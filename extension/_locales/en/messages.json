@@ -163,5 +163,8 @@
   },
   "btnFit": {
     "message": "Fit the window to the video"
+  },
+  "fitBlocked": {
+    "message": "The browser did not let the window be resized. Drag its edge."
   }
 }
