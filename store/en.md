@@ -34,7 +34,7 @@ BOOKMARKS AND FRAME NOTES
 • Copy a link that opens the video at the current timecode
 
 QUICK CONTROL
-• Shadow mode: window opacity from 30% to 100%
+• Shadow mode: opacity from 30% to 100% in the mini player over the page
 • Playback speed 0.25×–4× and volume presets in the player and the popup
 • Hotkeys for speed and bookmarks
 

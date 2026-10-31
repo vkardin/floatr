@@ -20,7 +20,7 @@ Save as `store/screenshots/<lang>/01-float.png` and so on, for `en`, `ru`, `uk`.
 2. **02-resume** — a video page with the "Continue from 12:34?" prompt. Caption: "Continue right where you stopped".
 3. **03-bookmarks** — the popup with three bookmarks with notes. Caption: "Bookmarks and notes to the frame".
 4. **04-markdown** — the exported `.md` file open in Obsidian next to the video. Caption: "Export to Markdown for Obsidian and Notion".
-5. **05-shadow** — the floating window at 50% opacity over a document, speed 1.5× shown. Caption: "Shadow mode, speed and volume at hand".
+5. **05-shadow** — the page mini player at 50% opacity over an article, speed 1.5× shown. Caption: "Shadow mode, speed and volume at hand".
 
 Use the browser interface in the matching language, the system dark theme, and 125% zoom for readability.
 
