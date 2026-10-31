@@ -8,7 +8,7 @@ Use the same texts for Chrome Web Store, Firefox Add-ons and Opera Addons.
 | Firefox Add-ons | Photos, Music & Videos | 250 characters (summary) |
 | Opera Addons | Productivity | 132 characters |
 
-Website: https://vkardin.github.io/videodrift/ · Support: https://vkardin.github.io/videodrift/support.html · Privacy policy: https://vkardin.github.io/videodrift/privacy.html
+Website: https://vkardin.github.io/video-drift/ · Support: https://vkardin.github.io/video-drift/support.html · Privacy policy: https://vkardin.github.io/video-drift/privacy.html
 
 ## Short description
 

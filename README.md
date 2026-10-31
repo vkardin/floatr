@@ -6,9 +6,9 @@
 English · <a href="README.ru.md">Русский</a> · <a href="README.uk.md">Українська</a></p>
 
 <p align="center">
-<a href="../../releases"><img alt="Chrome" src="https://img.shields.io/github/v/release/vkardin/videodrift?label=Chrome&logo=googlechrome&logoColor=white"></a>
-<a href="../../releases"><img alt="Firefox" src="https://img.shields.io/github/v/release/vkardin/videodrift?label=Firefox&logo=firefoxbrowser&logoColor=white"></a>
-<a href="https://vkardin.github.io/videodrift/"><img alt="Website" src="https://img.shields.io/badge/site-vkardin.github.io%2Fvideo--drift-222"></a>
+<a href="../../releases"><img alt="Chrome" src="https://img.shields.io/github/v/release/vkardin/video-drift?label=Chrome&logo=googlechrome&logoColor=white"></a>
+<a href="../../releases"><img alt="Firefox" src="https://img.shields.io/github/v/release/vkardin/video-drift?label=Firefox&logo=firefoxbrowser&logoColor=white"></a>
+<a href="https://vkardin.github.io/video-drift/"><img alt="Website" src="https://img.shields.io/badge/site-vkardin.github.io%2Fvideo--drift-222"></a>
 <a href="LICENSE"><img alt="MIT" src="https://img.shields.io/badge/license-MIT-blue"></a>
 </p>
 
@@ -42,12 +42,12 @@ Video Drift pops any web video into a floating window that stays on top while yo
 
 ## Privacy
 
-Video Drift collects no data and sends nothing anywhere: everything runs on your device. [Privacy policy](https://vkardin.github.io/videodrift/privacy.html).
+Video Drift collects no data and sends nothing anywhere: everything runs on your device. [Privacy policy](https://vkardin.github.io/video-drift/privacy.html).
 
 ## Feedback and support
 
-- Ideas and bug reports: [feedback page](https://vkardin.github.io/videodrift/support.html) or [GitHub Issues](../../issues/new/choose)
-- Support the project with crypto: [https://vkardin.github.io/videodrift/#donate](https://vkardin.github.io/videodrift/#donate)
+- Ideas and bug reports: [feedback page](https://vkardin.github.io/video-drift/support.html) or [GitHub Issues](../../issues/new/choose)
+- Support the project with crypto: [https://vkardin.github.io/video-drift/#donate](https://vkardin.github.io/video-drift/#donate)
 
 ## Repository
 
