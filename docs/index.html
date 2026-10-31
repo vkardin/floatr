@@ -4,113 +4,188 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Video Drift — floating video player with timecode memory</title>
-  <meta name="description" content="Video Drift pops any web video into a floating window with subtitles, remembers where you stopped, and exports bookmarks with notes to Markdown.">
+  <meta name="description" content="Video Drift pops any web video into a floating window with subtitles, remembers where you stopped and exports notes to the frame to Markdown. Free extension for Chrome and Firefox.">
+  <meta property="og:title" content="Video Drift">
   <link rel="icon" href="img/logo.svg" type="image/svg+xml">
   <link rel="stylesheet" href="style.css">
 </head>
 <body data-page="index">
-<header class="top">
-  <div class="wrap">
-    <a class="brand" href="#"><img src="img/logo.svg" alt="">Video Drift</a>
-    <nav class="links">
-      <a href="#features" data-i18n="navFeatures">Features</a>
-      <a href="#install" data-i18n="navInstall">Install</a>
-      <a href="#faq" data-i18n="navFaq">FAQ</a>
-      <a href="#donate" data-i18n="navSupport">Support</a>
-    </nav>
-    <div class="langs"><button data-lang="ru">RU</button><button data-lang="uk">UK</button><button data-lang="en">EN</button></div>
-  </div>
-</header>
-
-<main class="wrap">
-  <div class="hero">
-    <div>
-      <h1 data-i18n="heroTitle">Any video. <em>Floating.</em> Right where you stopped.</h1>
-      <p class="lead" data-i18n="heroLead">Video Drift pops web video into a floating window that keeps the site's subtitles, remembers the exact second you stopped on every video and turns your notes into a tidy Markdown file.</p>
-      <div class="cta">
-        <a class="btn primary" href="https://github.com/vkardin/video-drift/releases" data-i18n="ctaDownload">Download for Chrome &amp; Firefox</a>
-        <a class="btn" href="https://github.com/vkardin/video-drift">GitHub</a>
+  <header class="top">
+    <div class="wrap">
+      <a class="brand" href="#"><img src="img/logo.svg" alt="">Video Drift</a>
+      <nav class="nav">
+        <a href="#features" data-i18n="navFeatures">Features</a>
+        <a href="#install" data-i18n="navInstall">Install</a>
+        <a href="#donate" data-i18n="navDonate">Donate</a>
+        <a href="support.html" data-i18n="navSupport">Support</a>
+      </nav>
+      <div class="langs" role="group" aria-label="Language">
+        <button type="button" data-lang="ru">RU</button>
+        <button type="button" data-lang="uk">UK</button>
+        <button type="button" data-lang="en">EN</button>
       </div>
     </div>
-    <div class="demo" aria-hidden="true">
-      <div class="doc"><div class="bar m"></div><div class="bar"></div><div class="bar s"></div><div class="bar m"></div><div class="bar s"></div></div>
-      <div class="toast"><b data-i18n="demoResume">Continue from 12:34?</b><span data-i18n="demoYes">Continue</span></div>
-      <div class="pip">
-        <svg class="wave" viewBox="0 0 200 40" preserveAspectRatio="none"><path d="M0 20c17-18 33-18 50 0s33 18 50 0 33-18 50 0 33 18 50 0" fill="none" stroke="rgba(255,255,255,.55)" stroke-width="4"/></svg>
-        <div class="sub" data-i18n="demoSub">Subtitles stay with the video</div>
-        <div class="ctl"><i></i><i></i><i></i><span>1.5×</span><span>75%</span><b>12:34</b></div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="wrap">
+        <h1 data-i18n="heroTitle">Any video. <em>Floating.</em> Right where you stopped.</h1>
+        <p class="lead" data-i18n="heroLead">Video Drift pops web video into a floating window that keeps the site's subtitles, remembers the exact second you stopped on every video and turns your notes into a tidy Markdown file.</p>
+        <div class="cta">
+          <a class="btn primary" href="https://github.com/vkardin/video-drift/releases" data-i18n="btnChrome">Download for Chrome</a>
+          <a class="btn" href="https://github.com/vkardin/video-drift/releases" data-i18n="btnFirefox">Download for Firefox</a>
+        </div>
+        <p class="free" data-i18n="hero_free">Free, no accounts, no ads. YouTube, Twitch and any other site.</p>
+        <div class="screen">
+          <div class="demo" aria-hidden="true">
+            <div class="chrome"><i></i><i></i><i></i><span></span></div>
+            <div class="doc-lines"><b></b><b></b><b></b><b></b><b></b><b></b><b></b></div>
+            <div class="resume"><b data-i18n="demoResume">Continue from 12:34?</b><span data-i18n="demoYes">Continue</span></div>
+            <div class="pip">
+              <svg class="wave" viewBox="0 0 200 40" preserveAspectRatio="none"><path d="M0 20c17-18 33-18 50 0s33 18 50 0 33-18 50 0 33 18 50 0" fill="none" stroke="rgba(255,255,255,.5)" stroke-width="4"/></svg>
+              <div class="sub" data-i18n="demoSub">Subtitles stay with the video</div>
+              <div class="panel"><div class="bar"></div><div class="ctl"><i></i><i></i><i></i><span>1.5×</span><span>75%</span><em>12:34</em></div></div>
+            </div>
+          </div>
+        </div>
       </div>
+    </section>
+
+    <section class="block" id="features">
+      <div class="wrap">
+        <h2 data-i18n="fTitle">Everything a floating player should do</h2>
+        <p class="sub" data-i18n="fSub">Works on YouTube, Vimeo, Twitch, online courses and almost any site with an HTML5 video.</p>
+        <div class="grid">
+          <div class="tile"><b data-i18n="f1t">Smart floating window</b><span data-i18n="f1d">Document Picture-in-Picture with Video Drift's own controls, native PiP or an in-page mini player as a fallback.</span></div>
+          <div class="tile"><b data-i18n="f2t">Subtitles never vanish</b><span data-i18n="f2d">Captions drawn by the site are mirrored into the floating window.</span></div>
+          <div class="tile"><b data-i18n="f3t">Timecode memory</b><span data-i18n="f3d">Every video remembers where you stopped and offers to continue from that second.</span></div>
+          <div class="tile"><b data-i18n="f4t">Bookmarks and frame notes</b><span data-i18n="f4d">Mark a moment with a note in one click and export everything to Markdown for Obsidian or Notion.</span></div>
+          <div class="tile"><b data-i18n="f5t">Link with timecode</b><span data-i18n="f5d">Copy a link that opens the video exactly at the current moment.</span></div>
+          <div class="tile"><b data-i18n="f6t">Shadow mode and quick control</b><span data-i18n="f6d">Opacity from 30% to 100% in the page mini player, speed 0.25×–4×, volume presets and hotkeys right in the player.</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="block" id="install">
+      <div class="wrap">
+        <h2 data-i18n="iTitle">Install</h2>
+        <p class="sub" data-i18n="iSub">Store listings are coming soon. Until then, install the release archive.</p>
+        <div class="install">
+          <a class="tile store" href="https://github.com/vkardin/video-drift/releases" target="_blank" rel="noopener">
+            <svg viewBox="0 0 48 48" aria-hidden="true"><circle cx="24" cy="24" r="22" fill="#f3f2ef"/><circle cx="24" cy="24" r="9" fill="#0a0a0b"/><circle cx="24" cy="24" r="6" fill="#f3f2ef"/><path d="M24 15h19M16.2 28.5 6.7 12M31.8 28.5 22.3 45" stroke="#0a0a0b" stroke-width="2.4"/></svg>
+            <div><b>Chrome, Edge, Brave, Opera</b><span data-i18n="iChrome">video-drift-chrome zip · Load unpacked in chrome://extensions</span></div>
+          </a>
+          <a class="tile store" href="https://github.com/vkardin/video-drift/releases" target="_blank" rel="noopener">
+            <svg viewBox="0 0 48 48" aria-hidden="true"><circle cx="24" cy="24" r="22" fill="#f3f2ef"/><path d="M24 9a15 15 0 1 0 14.6 11.6c-1.4 3-4 4.4-6.4 4.4 1.2-5.5-2.2-10-7-11.5 1.4 3-1.2 5.3-3.4 5.6-2.3.4-4 2.3-4 4.6 0 3.3 2.8 5.8 6.2 5.8" fill="none" stroke="#0a0a0b" stroke-width="2.6" stroke-linecap="round"/></svg>
+            <div><b>Firefox</b><span data-i18n="iFirefox">video-drift-firefox zip · about:debugging → Load Temporary Add-on</span></div>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <section class="block" id="faq">
+      <div class="wrap">
+        <h2 data-i18n="qTitle">FAQ</h2>
+        <div class="faq">
+          <details><summary data-i18n="q1">Does Video Drift send my data anywhere?</summary><p data-i18n="a1">No. Everything stays in your browser storage. There are no servers, analytics or trackers.</p></details>
+          <details><summary data-i18n="q2">Why do subtitles show in Video Drift's window but not in native PiP?</summary><p data-i18n="a2">Native Picture-in-Picture shows only the video frame. Video Drift's Document Picture-in-Picture window can show HTML, so subtitles drawn by the site are copied there.</p></details>
+          <details><summary data-i18n="q3">Does it work in Firefox?</summary><p data-i18n="a3">Yes. Firefox has no Document Picture-in-Picture API, so Video Drift opens a draggable, resizable mini player on top of the page with the same controls.</p></details>
+          <details><summary data-i18n="q4">Where are my bookmarks stored?</summary><p data-i18n="a4">In browser sync storage, so they follow you to other computers signed in to the same browser profile. Export them to Markdown at any time.</p></details>
+          <details><summary data-i18n="q5">The floating window does not open from the popup.</summary><p data-i18n="a5">Some browsers require a click on the page itself. Click the video once, then use the button over the video or Alt+Shift+P.</p></details>
+        </div>
+      </div>
+    </section>
+
+    <section class="block" id="feedback">
+      <div class="wrap fb-cta">
+        <div>
+          <h2 data-i18n="fb_title">Have an idea or found a bug?</h2>
+          <p class="sub" data-i18n="fb_sub">Tell me what’s missing. The best ideas go into the next versions.</p>
+        </div>
+        <a class="btn primary" href="support.html" data-i18n="fb_btn">Write to us</a>
+      </div>
+    </section>
+
+    <section class="block" id="more">
+      <div class="wrap">
+        <h2 data-i18n="more_title">More from the author</h2>
+        <p class="sub" data-i18n="more_sub">Video Drift is made by one developer. Here are three more free, open-source tools.</p>
+        <div class="apps">
+        <article class="app app-glow">
+          <a class="shot" href="https://vkardin.github.io/video-glow/" target="_blank" rel="noopener" tabindex="-1" aria-hidden="true"><img data-shot="apps/glow" src="img/apps/glow-en.webp" alt="" width="960" height="600" loading="lazy"></a>
+          <div class="app-body">
+            <header><img src="img/apps/video-glow.svg" alt="" width="52" height="52"><div><h3>Video Glow</h3><span data-i18n="vg_kind"></span></div></header>
+            <p data-i18n="vg_desc"></p>
+            <ul class="chips"><li data-i18n="vg_c1"></li><li data-i18n="vg_c2"></li><li data-i18n="vg_c3"></li><li data-i18n="vg_c4"></li></ul>
+            <div class="app-links">
+              <a class="btn-app primary" href="https://vkardin.github.io/video-glow/" target="_blank" rel="noopener"><span data-i18n="more_site"></span> <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 4h6v6M20 4l-9 9M18 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h5"/></svg></a>
+              <a class="btn-app" href="https://chromewebstore.google.com/detail/bjgbalkabocifimhnhbcnomeknpbhkea" target="_blank" rel="noopener">Chrome Web Store</a>
+              <a class="btn-app" href="https://github.com/vkardin/video-glow" target="_blank" rel="noopener">GitHub</a>
+            </div>
+          </div>
+        </article>
+        <article class="app app-leveler">
+          <a class="shot" href="https://vkardin.github.io/leveler/" target="_blank" rel="noopener" tabindex="-1" aria-hidden="true"><img data-shot="apps/leveler" src="img/apps/leveler-en.webp" alt="" width="960" height="600" loading="lazy"></a>
+          <div class="app-body">
+            <header><img src="img/apps/leveler.svg" alt="" width="52" height="52"><div><h3>Leveler</h3><span data-i18n="lv_kind"></span></div></header>
+            <p data-i18n="lv_desc"></p>
+            <ul class="chips"><li data-i18n="lv_c1"></li><li data-i18n="lv_c2"></li><li data-i18n="lv_c3"></li><li data-i18n="lv_c4"></li></ul>
+            <div class="app-links">
+              <a class="btn-app primary" href="https://vkardin.github.io/leveler/" target="_blank" rel="noopener"><span data-i18n="more_site"></span> <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 4h6v6M20 4l-9 9M18 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h5"/></svg></a>
+              <a class="btn-app" href="https://chromewebstore.google.com/detail/phbjpipnbhffcegccfbbfabbhmgaelko" target="_blank" rel="noopener">Chrome Web Store</a>
+              <a class="btn-app" href="https://github.com/vkardin/leveler" target="_blank" rel="noopener">GitHub</a>
+            </div>
+          </div>
+        </article>
+        <article class="app app-snapt">
+          <a class="shot" href="https://vkardin.github.io/snapt/" target="_blank" rel="noopener" tabindex="-1" aria-hidden="true"><img src="img/apps/snapt.webp" alt="" width="960" height="600" loading="lazy"></a>
+          <div class="app-body">
+            <header><img src="img/apps/snapt.svg" alt="" width="52" height="52"><div><h3>Snapt</h3><span data-i18n="sn_kind"></span></div></header>
+            <p data-i18n="sn_desc"></p>
+            <ul class="chips"><li data-i18n="sn_c1"></li><li data-i18n="sn_c2"></li><li data-i18n="sn_c3"></li><li data-i18n="sn_c4"></li></ul>
+            <div class="app-links">
+              <a class="btn-app primary" href="https://vkardin.github.io/snapt/" target="_blank" rel="noopener"><span data-i18n="more_site"></span> <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 4h6v6M20 4l-9 9M18 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h5"/></svg></a>
+              <a class="btn-app" href="https://github.com/vkardin/snapt/releases" target="_blank" rel="noopener" data-i18n="more_dl"></a>
+              <a class="btn-app" href="https://github.com/vkardin/snapt" target="_blank" rel="noopener">GitHub</a>
+            </div>
+          </div>
+        </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="block donate" id="donate">
+      <div class="wrap">
+        <h2 data-i18n="d_title">Support the project</h2>
+        <p class="sub" data-i18n="d_sub">Video Drift is free and has no ads. If you enjoy it, you can support development with crypto. Any amount helps ship new versions.</p>
+        <div class="wallets" id="wallets"></div>
+        <p class="warn" data-i18n="d_warn">Send coins only on the network shown on the card. A transfer on another network may be lost.</p>
+        <p class="thanks" data-i18n="d_thanks">Thank you for being here.</p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="foot">
+    <div class="wrap">
+      <span>© <span id="year">2026</span> Video Drift</span>
+      <a href="support.html" data-i18n="navSupport">Support</a>
+      <a href="privacy.html" data-i18n="navPrivacy">Privacy</a>
+      <a href="#donate" data-i18n="navDonate">Donate</a>
+      <a href="https://github.com/vkardin/video-glow" data-i18n="fromAuthor">From the author of Video Glow</a>
     </div>
-  </div>
-</main>
+  </footer>
 
-<section id="features" class="alt">
-  <div class="wrap">
-    <h2 data-i18n="fTitle">Everything a floating player should do</h2>
-    <p class="sub" data-i18n="fSub">Works on YouTube, Vimeo, Twitch, online courses and almost any site with an HTML5 video.</p>
-    <div class="grid">
-      <div class="card"><div class="ico">⧉</div><h3 data-i18n="f1t">Smart floating window</h3><p data-i18n="f1d">Document Picture-in-Picture with Video Drift's own controls, native PiP or an in-page mini player as a fallback.</p></div>
-      <div class="card"><div class="ico">💬</div><h3 data-i18n="f2t">Subtitles never vanish</h3><p data-i18n="f2d">Captions drawn by the site are mirrored into the floating window.</p></div>
-      <div class="card"><div class="ico">⏱</div><h3 data-i18n="f3t">Timecode memory</h3><p data-i18n="f3d">Every video remembers where you stopped and offers to continue from that second.</p></div>
-      <div class="card"><div class="ico">🔖</div><h3 data-i18n="f4t">Bookmarks and frame notes</h3><p data-i18n="f4d">Mark a moment with a note in one click and export everything to Markdown for Obsidian or Notion.</p></div>
-      <div class="card"><div class="ico">🔗</div><h3 data-i18n="f5t">Link with timecode</h3><p data-i18n="f5d">Copy a link that opens the video exactly at the current moment.</p></div>
-      <div class="card"><div class="ico">◐</div><h3 data-i18n="f6t">Shadow mode and quick control</h3><p data-i18n="f6d">Opacity from 30% to 100% in the page mini player, speed 0.25×–4×, volume presets and hotkeys right in the player.</p></div>
+  <template id="wallet">
+    <div class="tile">
+      <div class="coin"><i></i><div><b></b><small></small></div></div>
+      <div class="qr"><img alt="QR" width="300" height="300"></div>
+      <div class="addr"></div>
+      <button type="button" class="btn copy"></button>
     </div>
-  </div>
-</section>
-
-<section id="install">
-  <div class="wrap">
-    <h2 data-i18n="iTitle">Install in three steps</h2>
-    <p class="sub" data-i18n="iSub">Store listings are coming soon. Until then, install the release archive.</p>
-    <div class="steps">
-      <div class="card"><h3 data-i18n="s1t">Download</h3><p data-i18n="s1d">Get video-drift-chrome or video-drift-firefox zip from GitHub Releases.</p></div>
-      <div class="card"><h3 data-i18n="s2t">Load</h3><p data-i18n="s2d">Chrome, Edge, Brave, Opera: unzip, open chrome://extensions, turn on Developer mode and click Load unpacked. Firefox: about:debugging → Load Temporary Add-on.</p></div>
-      <div class="card"><h3 data-i18n="s3t">Float</h3><p data-i18n="s3d">Hover any video and click the Video Drift button, or press Alt+Shift+P.</p></div>
-    </div>
-  </div>
-</section>
-
-<section id="faq" class="alt">
-  <div class="wrap">
-    <h2 data-i18n="qTitle">FAQ</h2>
-    <details class="faq"><summary data-i18n="q1">Does Video Drift send my data anywhere?</summary><p data-i18n="a1">No. Everything stays in your browser storage. There are no servers, analytics or trackers.</p></details>
-    <details class="faq"><summary data-i18n="q2">Why do subtitles show in Video Drift's window but not in native PiP?</summary><p data-i18n="a2">Native Picture-in-Picture shows only the video frame. Video Drift's Document Picture-in-Picture window can show HTML, so subtitles drawn by the site are copied there.</p></details>
-    <details class="faq"><summary data-i18n="q3">Does it work in Firefox?</summary><p data-i18n="a3">Yes. Firefox has no Document Picture-in-Picture API, so Video Drift opens a draggable, resizable mini player on top of the page with the same controls.</p></details>
-    <details class="faq"><summary data-i18n="q4">Where are my bookmarks stored?</summary><p data-i18n="a4">In browser sync storage, so they follow you to other computers signed in to the same browser profile. Export them to Markdown at any time.</p></details>
-    <details class="faq"><summary data-i18n="q5">The floating window does not open from the popup.</summary><p data-i18n="a5">Some browsers require a click on the page itself. Click the video once, then use the button over the video or Alt+Shift+P.</p></details>
-  </div>
-</section>
-
-<section class="block donate" id="donate">
-  <div class="wrap">
-    <h2 data-i18n="d_title">Support the project</h2>
-    <p class="sub" data-i18n="d_sub">Video Drift is free and has no ads. If you enjoy it, you can support development with crypto. Any amount helps ship new versions.</p>
-    <div class="wallets" id="wallets"></div>
-    <p class="warn" data-i18n="d_warn">Send coins only on the network shown on the card. A transfer on another network may be lost.</p>
-    <p class="thanks" data-i18n="d_thanks">Thank you for being here.</p>
-  </div>
-</section>
-
-<footer>
-  <div class="wrap">
-    <span>© <span id="year">2026</span> Video Drift</span>
-    <a href="support.html" data-i18n="navSupport">Support</a>
-    <a href="privacy.html" data-i18n="navPrivacy">Privacy</a>
-    <a href="https://github.com/vkardin/video-drift">GitHub</a>
-    <a class="sp" href="https://github.com/vkardin/video-glow" data-i18n="fromAuthor">From the author of Video Glow</a>
-  </div>
-</footer>
-<template id="wallet">
-  <div class="tile">
-    <div class="coin"><i></i><div><b></b><small></small></div></div>
-    <div class="qr"><img alt="QR" width="300" height="300"></div>
-    <div class="addr"></div>
-    <button type="button" class="btn copy"></button>
-  </div>
-</template>
-<script src="i18n.js"></script>
-<script src="app.js"></script>
-<script src="donate.js"></script>
+  </template>
+  <script src="i18n.js"></script>
+  <script src="app.js"></script>
+  <script src="donate.js"></script>
 </body>
 </html>

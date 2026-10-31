@@ -19,7 +19,8 @@
       el.innerHTML = v != null ? v : el._en;
     });
     document.title = dict['_title_' + document.body.dataset.page] || enTitle;
-    document.querySelectorAll('.langs button').forEach((b) => b.classList.toggle('on', b.dataset.lang === l));
+    document.querySelectorAll('.langs button').forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.lang === l)));
+    document.querySelectorAll('img[data-shot]').forEach((img) => { img.src = 'img/' + img.dataset.shot + '-' + l + '.webp'; });
     try { localStorage.setItem('video-drift-lang', l); } catch (e) {}
   }
 
