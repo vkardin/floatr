@@ -9,9 +9,9 @@
 </p>
 
 <p align="center">
-  <a href="https://github.com/vkardin/floatr/releases"><img src="https://img.shields.io/badge/Chrome-extension-0d9488?logo=googlechrome&logoColor=white" alt="Chrome"></a>
-  <a href="https://github.com/vkardin/floatr/releases"><img src="https://img.shields.io/badge/Firefox-add--on-0d9488?logo=firefoxbrowser&logoColor=white" alt="Firefox"></a>
-  <a href="https://vkardin.github.io/floatr/"><img src="https://img.shields.io/badge/Website-aloft-0d9488" alt="Сайт"></a>
+  <a href="https://github.com/vkardin/aloft/releases"><img src="https://img.shields.io/badge/Chrome-extension-0d9488?logo=googlechrome&logoColor=white" alt="Chrome"></a>
+  <a href="https://github.com/vkardin/aloft/releases"><img src="https://img.shields.io/badge/Firefox-add--on-0d9488?logo=firefoxbrowser&logoColor=white" alt="Firefox"></a>
+  <a href="https://vkardin.github.io/aloft/"><img src="https://img.shields.io/badge/Website-aloft-0d9488" alt="Сайт"></a>
   <a href="LICENSE"><img src="https://img.shields.io/badge/License-MIT-0d9488" alt="MIT"></a>
 </p>
 
@@ -47,14 +47,14 @@ Aloft выносит любое веб-видео в плавающее окно
 
 **Вручную из Releases:**
 
-1. Скачайте `aloft-chrome-<версия>.zip` или `aloft-firefox-<версия>.zip` из [Releases](https://github.com/vkardin/floatr/releases).
+1. Скачайте `aloft-chrome-<версия>.zip` или `aloft-firefox-<версия>.zip` из [Releases](https://github.com/vkardin/aloft/releases).
 2. Chrome, Edge, Brave, Opera: распакуйте архив, откройте `chrome://extensions`, включите *Режим разработчика*, нажмите *Загрузить распакованное* и выберите папку.
 3. Firefox: откройте `about:debugging#/runtime/this-firefox`, нажмите *Загрузить временное дополнение* и выберите zip.
 
 **Из исходников:**
 
 ```bash
-git clone https://github.com/vkardin/floatr.git
+git clone https://github.com/vkardin/aloft.git
 cd aloft
 python3 tools/build.py        # dist/aloft-chrome-1.0.0.zip, dist/aloft-firefox-1.0.0.zip
 ```
@@ -70,11 +70,11 @@ python3 tools/build.py        # dist/aloft-chrome-1.0.0.zip, dist/aloft-firefox-
 
 ## Приватность
 
-Aloft работает полностью в браузере. Настройки и закладки хранятся в синхронизируемом хранилище браузера, позиции просмотра в локальном. Никаких серверов, аналитики и трекеров. Подробнее: [политика конфиденциальности](https://vkardin.github.io/floatr/privacy.html).
+Aloft работает полностью в браузере. Настройки и закладки хранятся в синхронизируемом хранилище браузера, позиции просмотра в локальном. Никаких серверов, аналитики и трекеров. Подробнее: [политика конфиденциальности](https://vkardin.github.io/aloft/privacy.html).
 
 ## Обратная связь и поддержка
 
-Нашли ошибку или есть идея? Создайте [issue](https://github.com/vkardin/floatr/issues/new/choose). Если Aloft экономит вам время, можно [поддержать проект](https://vkardin.github.io/floatr/#donate).
+Нашли ошибку или есть идея? Создайте [issue](https://github.com/vkardin/aloft/issues/new/choose). Если Aloft экономит вам время, можно [поддержать проект](https://vkardin.github.io/aloft/#donate).
 
 ## Репозиторий
 
