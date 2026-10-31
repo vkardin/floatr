@@ -1,10 +1,10 @@
-// Floatr content script: floating player, timecode memory, bookmarks, quick controls.
+// Aloft content script: floating player, timecode memory, bookmarks, quick controls.
 (function () {
   'use strict';
-  if (window.__floatrLoaded) return;
-  window.__floatrLoaded = true;
+  if (window.__aloftLoaded) return;
+  window.__aloftLoaded = true;
 
-  const F = globalThis.Floatr;
+  const F = globalThis.Aloft;
   const api = F.api;
   const t = (id, subs) => api.i18n.getMessage(id, subs) || id;
 
@@ -90,8 +90,8 @@
   }
 
   function hookVideo(v) {
-    if (v.__floatrHooked) return;
-    v.__floatrHooked = true;
+    if (v.__aloftHooked) return;
+    v.__aloftHooked = true;
     v.addEventListener('timeupdate', () => savePos(v, false));
     v.addEventListener('pause', () => savePos(v, true));
     v.addEventListener('loadedmetadata', () => setTimeout(() => offerResume(v), 800));
@@ -127,7 +127,7 @@
   let overlay = null;
   function getOverlay() {
     if (overlay && overlay.host.isConnected) return overlay;
-    const host = document.createElement('floatr-overlay');
+    const host = document.createElement('aloft-overlay');
     host.style.cssText = 'all:initial;position:fixed;inset:0 auto auto 0;z-index:2147483647;';
     const root = host.attachShadow({ mode: 'open' });
     root.innerHTML = '<style>' + OVERLAY_CSS + '</style><div class="toasts"></div>' +
@@ -277,7 +277,7 @@
     const style = pw.document.createElement('style');
     style.textContent = PLAYER_CSS + 'html,body{margin:0;height:100%;background:#000;overflow:hidden}';
     pw.document.head.appendChild(style);
-    pw.document.title = 'Floatr';
+    pw.document.title = 'Aloft';
     state.ui = buildPlayer(pw.document, pw.document.body, v, pw);
     if (wasPlaying) v.play().catch(() => {});
     pw.addEventListener('pagehide', () => teardown());
@@ -300,7 +300,7 @@
     const wasPlaying = !v.paused;
     detachVideo(v);
     state.mode = 'float';
-    const host = document.createElement('floatr-player');
+    const host = document.createElement('aloft-player');
     host.style.cssText = 'all:initial;position:fixed;right:24px;bottom:24px;z-index:2147483647;';
     const root = host.attachShadow({ mode: 'open' });
     const style = document.createElement('style');

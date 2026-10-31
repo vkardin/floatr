@@ -1,4 +1,4 @@
-# Floatr — English listing
+# Aloft — English listing
 
 Use the same texts for Chrome Web Store, Firefox Add-ons and Opera Addons.
 
@@ -16,10 +16,10 @@ Floating video player that remembers where you stopped: subtitles in PiP, bookma
 
 ## Long description
 
-Floatr turns any web video into a floating window that stays on top while you work, read or chat, and remembers the exact second you stopped on every video.
+Aloft turns any web video into a floating window that stays on top while you work, read or chat, and remembers the exact second you stopped on every video.
 
 SMART FLOATING PLAYER
-• Document Picture-in-Picture window with Floatr's own controls
+• Document Picture-in-Picture window with Aloft's own controls
 • Subtitles drawn by the site (YouTube, Netflix, Video.js, Plyr, JW Player and more) stay with the video
 • Falls back to native Picture-in-Picture or an in-page mini player you can drag and resize
 • Choose which buttons the player shows

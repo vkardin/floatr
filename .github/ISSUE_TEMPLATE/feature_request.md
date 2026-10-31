@@ -1,6 +1,6 @@
 ---
 name: Feature request
-about: Suggest an idea for Floatr
+about: Suggest an idea for Aloft
 labels: enhancement
 ---
 

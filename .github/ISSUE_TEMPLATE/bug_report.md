@@ -1,6 +1,6 @@
 ---
 name: Bug report
-about: Something in Floatr does not work as expected
+about: Something in Aloft does not work as expected
 labels: bug
 ---
 
@@ -14,5 +14,5 @@ labels: bug
 
 **Environment**
 - Browser and version:
-- Floatr version:
+- Aloft version:
 - Site where it happens (URL):

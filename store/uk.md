@@ -1,4 +1,4 @@
-# Floatr — Український текст для магазинів
+# Aloft — Український текст для магазинів
 
 Use the same texts for Chrome Web Store, Firefox Add-ons and Opera Addons.
 
@@ -16,10 +16,10 @@ Website: https://vkardin.github.io/floatr/ · Support: https://vkardin.github.io
 
 ## Long description
 
-Floatr виносить будь-яке веб-відео у плаваюче вікно поверх інших, поки ви працюєте, читаєте чи листуєтеся, і запам'ятовує точну секунду зупинки для кожного відео.
+Aloft виносить будь-яке веб-відео у плаваюче вікно поверх інших, поки ви працюєте, читаєте чи листуєтеся, і запам'ятовує точну секунду зупинки для кожного відео.
 
 РОЗУМНИЙ ПЛАВАЮЧИЙ ПЛЕЄР
-• Вікно Document Picture-in-Picture із власними кнопками Floatr
+• Вікно Document Picture-in-Picture із власними кнопками Aloft
 • Субтитри сайту (YouTube, Netflix, Video.js, Plyr, JW Player та інші) залишаються з відео
 • Запасні варіанти: нативний Picture-in-Picture або міні-плеєр на сторінці, який можна перетягувати й розтягувати
 • Обирайте, які кнопки показувати

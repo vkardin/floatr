@@ -1,6 +1,6 @@
 {
   "extName": {
-    "message": "Floatr — floating video player"
+    "message": "Aloft — floating video player"
   },
   "extDescription": {
     "message": "Floating video player with timecode memory, subtitles, frame notes, Markdown export, shadow mode and quick sound control."
@@ -81,7 +81,7 @@
     "message": "Close"
   },
   "popupNoVideo": {
-    "message": "Open a page with a video to use Floatr. Videos inside other extensions and browser pages are not available."
+    "message": "Open a page with a video to use Aloft. Videos inside other extensions and browser pages are not available."
   },
   "pipHint": {
     "message": "The browser blocked the floating window. Click the video once, then press Alt+Shift+P or use the button on the video."
@@ -132,7 +132,7 @@
     "message": "Delete"
   },
   "mdHeading": {
-    "message": "Floatr bookmarks"
+    "message": "Aloft bookmarks"
   },
   "btnGroup_play": {
     "message": "Play"

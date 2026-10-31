@@ -1,7 +1,7 @@
-// Floatr popup.
+// Aloft popup.
 (function () {
   'use strict';
-  const F = globalThis.Floatr;
+  const F = globalThis.Aloft;
   const api = F.api;
   const t = (id, subs) => api.i18n.getMessage(id, subs) || id;
   const $ = (id) => document.getElementById(id);
@@ -130,13 +130,13 @@
     if (!st) return;
     const rec = await F.getBookmarks(st.key);
     if (!rec) return;
-    download('floatr-' + slug(rec.title) + '.md', F.toMarkdown([rec], rec.title));
+    download('aloft-' + slug(rec.title) + '.md', F.toMarkdown([rec], rec.title));
   });
 
   $('exportAll').addEventListener('click', async () => {
     const all = await F.allBookmarks();
     if (!all.length) { flash($('exportAll'), t('bookmarksEmpty')); return; }
-    download('floatr-bookmarks-' + new Date().toISOString().slice(0, 10) + '.md', F.toMarkdown(all, t('mdHeading')));
+    download('aloft-bookmarks-' + new Date().toISOString().slice(0, 10) + '.md', F.toMarkdown(all, t('mdHeading')));
   });
 
   $('opacity').addEventListener('input', (e) => {

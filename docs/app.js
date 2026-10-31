@@ -2,7 +2,7 @@
 (function () {
   const LANGS = ['en', 'ru', 'uk'];
   let saved = null;
-  try { saved = localStorage.getItem('floatr-lang'); } catch (e) {}
+  try { saved = localStorage.getItem('aloft-lang'); } catch (e) {}
   const nav = (navigator.language || 'en').slice(0, 2);
   let lang = LANGS.includes(saved) ? saved : (LANGS.includes(nav) ? nav : 'en');
 
@@ -20,7 +20,7 @@
     });
     document.title = dict['_title_' + document.body.dataset.page] || enTitle;
     document.querySelectorAll('.langs button').forEach((b) => b.classList.toggle('on', b.dataset.lang === l));
-    try { localStorage.setItem('floatr-lang', l); } catch (e) {}
+    try { localStorage.setItem('aloft-lang', l); } catch (e) {}
   }
 
   document.querySelectorAll('.langs button').forEach((b) => b.addEventListener('click', () => apply(b.dataset.lang)));

@@ -1,6 +1,6 @@
-<p align="center"><img src="docs/img/logo.svg" width="96" alt="Floatr logo"></p>
+<p align="center"><img src="docs/img/logo.svg" width="96" alt="Aloft logo"></p>
 
-<h1 align="center">Floatr</h1>
+<h1 align="center">Aloft</h1>
 
 <p align="center"><b>The floating video player that remembers where you stopped.</b></p>
 
@@ -11,17 +11,17 @@
 <p align="center">
   <a href="https://github.com/vkardin/floatr/releases"><img src="https://img.shields.io/badge/Chrome-extension-0d9488?logo=googlechrome&logoColor=white" alt="Chrome"></a>
   <a href="https://github.com/vkardin/floatr/releases"><img src="https://img.shields.io/badge/Firefox-add--on-0d9488?logo=firefoxbrowser&logoColor=white" alt="Firefox"></a>
-  <a href="https://vkardin.github.io/floatr/"><img src="https://img.shields.io/badge/Website-floatr-0d9488" alt="Website"></a>
+  <a href="https://vkardin.github.io/floatr/"><img src="https://img.shields.io/badge/Website-aloft-0d9488" alt="Website"></a>
   <a href="LICENSE"><img src="https://img.shields.io/badge/License-MIT-0d9488" alt="MIT"></a>
 </p>
 
-Floatr pops any web video out into a floating window that stays on top while you work, keeps the site's subtitles with it, and remembers the exact second you stopped on every video. Mark moments with notes, export them to a tidy Markdown file for Obsidian or Notion, and share links that open right at the timecode.
+Aloft pops any web video out into a floating window that stays on top while you work, keeps the site's subtitles with it, and remembers the exact second you stopped on every video. Mark moments with notes, export them to a tidy Markdown file for Obsidian or Notion, and share links that open right at the timecode.
 
 ## Features
 
-- **Smart floating player.** Uses the Document Picture-in-Picture API so the window carries Floatr's own controls and the site's subtitles. Falls back to native Picture-in-Picture, and to an in-page mini player (draggable, resizable) where neither is available, for example in Firefox.
+- **Smart floating player.** Uses the Document Picture-in-Picture API so the window carries Aloft's own controls and the site's subtitles. Falls back to native Picture-in-Picture, and to an in-page mini player (draggable, resizable) where neither is available, for example in Firefox.
 - **Subtitles stay with the video.** Captions rendered by the site (YouTube, Netflix, Video.js, Plyr, JW Player, Shaka and others) are mirrored into the floating window.
-- **Timecode memory.** Floatr saves the playback position of every video and offers *Continue from 12:34?* the next time you open it.
+- **Timecode memory.** Aloft saves the playback position of every video and offers *Continue from 12:34?* the next time you open it.
 - **Bookmarks and frame notes.** Save a moment with an optional note from the popup, from the floating window or with <kbd>Alt</kbd>+<kbd>Shift</kbd>+<kbd>B</kbd>.
 - **Markdown export.** Export the notes of one video or of everything into a clean `.md` file with clickable timecodes.
 - **Copy link with timecode** in one click (YouTube, Vimeo, Twitch and generic `#t=` links).
@@ -47,7 +47,7 @@ Global shortcuts can be changed at `chrome://extensions/shortcuts` (Firefox: *Ma
 
 **Manual install from Releases:**
 
-1. Download `floatr-chrome-<version>.zip` or `floatr-firefox-<version>.zip` from [Releases](https://github.com/vkardin/floatr/releases).
+1. Download `aloft-chrome-<version>.zip` or `aloft-firefox-<version>.zip` from [Releases](https://github.com/vkardin/floatr/releases).
 2. Chrome, Edge, Brave, Opera: unzip the archive, open `chrome://extensions`, turn on *Developer mode*, click *Load unpacked* and pick the unzipped folder.
 3. Firefox: open `about:debugging#/runtime/this-firefox`, click *Load Temporary Add-on* and pick the zip (or `manifest.json` inside it).
 
@@ -55,8 +55,8 @@ Global shortcuts can be changed at `chrome://extensions/shortcuts` (Firefox: *Ma
 
 ```bash
 git clone https://github.com/vkardin/floatr.git
-cd floatr
-python3 tools/build.py        # dist/floatr-chrome-1.0.0.zip, dist/floatr-firefox-1.0.0.zip
+cd aloft
+python3 tools/build.py        # dist/aloft-chrome-1.0.0.zip, dist/aloft-firefox-1.0.0.zip
 ```
 
 For development, load the `extension/` folder directly with *Load unpacked*.
@@ -64,17 +64,17 @@ For development, load the `extension/` folder directly with *Load unpacked*.
 ### Testing locally
 
 1. Load `extension/` as an unpacked extension and open any page with a video (YouTube works well).
-2. Hover the video and click the Floatr button in its top right corner, or press <kbd>Alt</kbd>+<kbd>Shift</kbd>+<kbd>P</kbd>. Turn on subtitles and check that they show in the floating window.
+2. Hover the video and click the Aloft button in its top right corner, or press <kbd>Alt</kbd>+<kbd>Shift</kbd>+<kbd>P</kbd>. Turn on subtitles and check that they show in the floating window.
 3. Watch for a while, reload the page and accept *Continue from…*.
 4. Add a couple of bookmarks with notes in the popup and click *Export all*.
 
 ## Privacy
 
-Floatr works entirely in your browser. Settings and bookmarks are kept in browser sync storage, playback positions in local storage. There are no servers, no analytics and no trackers. Details: [privacy policy](https://vkardin.github.io/floatr/privacy.html).
+Aloft works entirely in your browser. Settings and bookmarks are kept in browser sync storage, playback positions in local storage. There are no servers, no analytics and no trackers. Details: [privacy policy](https://vkardin.github.io/floatr/privacy.html).
 
 ## Feedback and support
 
-Found a bug or have an idea? Open an [issue](https://github.com/vkardin/floatr/issues/new/choose). If Floatr saves you time, you can [support the project](https://vkardin.github.io/floatr/#donate).
+Found a bug or have an idea? Open an [issue](https://github.com/vkardin/floatr/issues/new/choose). If Aloft saves you time, you can [support the project](https://vkardin.github.io/floatr/#donate).
 
 ## Repository
 
