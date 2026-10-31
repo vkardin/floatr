@@ -1,6 +1,6 @@
 ---
 name: Feature request
-about: Suggest an idea for Vidrift
+about: Suggest an idea for Video Drift
 labels: enhancement
 ---
 

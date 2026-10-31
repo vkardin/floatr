@@ -1,7 +1,7 @@
-// Vidrift popup.
+// Video Drift popup.
 (function () {
   'use strict';
-  const F = globalThis.Vidrift;
+  const F = globalThis.VideoDrift;
   const api = F.api;
   const t = (id, subs) => api.i18n.getMessage(id, subs) || id;
   const $ = (id) => document.getElementById(id);
@@ -130,13 +130,13 @@
     if (!st) return;
     const rec = await F.getBookmarks(st.key);
     if (!rec) return;
-    download('vidrift-' + slug(rec.title) + '.md', F.toMarkdown([rec], rec.title));
+    download('video-drift-' + slug(rec.title) + '.md', F.toMarkdown([rec], rec.title));
   });
 
   $('exportAll').addEventListener('click', async () => {
     const all = await F.allBookmarks();
     if (!all.length) { flash($('exportAll'), t('bookmarksEmpty')); return; }
-    download('vidrift-bookmarks-' + new Date().toISOString().slice(0, 10) + '.md', F.toMarkdown(all, t('mdHeading')));
+    download('video-drift-bookmarks-' + new Date().toISOString().slice(0, 10) + '.md', F.toMarkdown(all, t('mdHeading')));
   });
 
   $('opacity').addEventListener('input', (e) => {

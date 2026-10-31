@@ -1,10 +1,10 @@
-// Vidrift content script: floating player, timecode memory, bookmarks, quick controls.
+// Video Drift content script: floating player, timecode memory, bookmarks, quick controls.
 (function () {
   'use strict';
-  if (window.__vidriftLoaded) return;
-  window.__vidriftLoaded = true;
+  if (window.__videoDriftLoaded) return;
+  window.__videoDriftLoaded = true;
 
-  const F = globalThis.Vidrift;
+  const F = globalThis.VideoDrift;
   const api = F.api;
   const t = (id, subs) => api.i18n.getMessage(id, subs) || id;
 
@@ -90,8 +90,8 @@
   }
 
   function hookVideo(v) {
-    if (v.__vidriftHooked) return;
-    v.__vidriftHooked = true;
+    if (v.__videoDriftHooked) return;
+    v.__videoDriftHooked = true;
     v.addEventListener('timeupdate', () => savePos(v, false));
     v.addEventListener('pause', () => savePos(v, true));
     v.addEventListener('loadedmetadata', () => setTimeout(() => offerResume(v), 800));
@@ -127,7 +127,7 @@
   let overlay = null;
   function getOverlay() {
     if (overlay && overlay.host.isConnected) return overlay;
-    const host = document.createElement('vidrift-overlay');
+    const host = document.createElement('video-drift-overlay');
     host.style.cssText = 'all:initial;position:fixed;inset:0 auto auto 0;z-index:2147483647;';
     const root = host.attachShadow({ mode: 'open' });
     root.innerHTML = '<style>' + OVERLAY_CSS + '</style><div class="toasts"></div>' +
@@ -277,7 +277,7 @@
     const style = pw.document.createElement('style');
     style.textContent = PLAYER_CSS + 'html,body{margin:0;height:100%;background:#000;overflow:hidden}';
     pw.document.head.appendChild(style);
-    pw.document.title = 'Vidrift';
+    pw.document.title = 'Video Drift';
     state.ui = buildPlayer(pw.document, pw.document.body, v, pw);
     if (wasPlaying) v.play().catch(() => {});
     pw.addEventListener('pagehide', () => teardown());
@@ -300,7 +300,7 @@
     const wasPlaying = !v.paused;
     detachVideo(v);
     state.mode = 'float';
-    const host = document.createElement('vidrift-player');
+    const host = document.createElement('video-drift-player');
     host.style.cssText = 'all:initial;position:fixed;right:24px;bottom:24px;z-index:2147483647;';
     const root = host.attachShadow({ mode: 'open' });
     const style = document.createElement('style');

@@ -1,4 +1,4 @@
-# Vidrift — English listing
+# Video Drift — English listing
 
 Use the same texts for Chrome Web Store, Firefox Add-ons and Opera Addons.
 
@@ -8,7 +8,7 @@ Use the same texts for Chrome Web Store, Firefox Add-ons and Opera Addons.
 | Firefox Add-ons | Photos, Music & Videos | 250 characters (summary) |
 | Opera Addons | Productivity | 132 characters |
 
-Website: https://vkardin.github.io/vidrift/ · Support: https://vkardin.github.io/vidrift/support.html · Privacy policy: https://vkardin.github.io/vidrift/privacy.html
+Website: https://vkardin.github.io/video-drift/ · Support: https://vkardin.github.io/video-drift/support.html · Privacy policy: https://vkardin.github.io/video-drift/privacy.html
 
 ## Short description
 
@@ -16,10 +16,10 @@ Floating video player that remembers where you stopped: subtitles in PiP, bookma
 
 ## Long description
 
-Vidrift turns any web video into a floating window that stays on top while you work, read or chat, and remembers the exact second you stopped on every video.
+Video Drift turns any web video into a floating window that stays on top while you work, read or chat, and remembers the exact second you stopped on every video.
 
 SMART FLOATING PLAYER
-• Document Picture-in-Picture window with Vidrift's own controls
+• Document Picture-in-Picture window with Video Drift's own controls
 • Subtitles drawn by the site (YouTube, Netflix, Video.js, Plyr, JW Player and more) stay with the video
 • Falls back to native Picture-in-Picture or an in-page mini player you can drag and resize
 • Choose which buttons the player shows

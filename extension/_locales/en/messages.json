@@ -1,6 +1,6 @@
 {
   "extName": {
-    "message": "Vidrift — floating video player"
+    "message": "Video Drift — floating video player"
   },
   "extDescription": {
     "message": "Floating video player with timecode memory, subtitles, frame notes, Markdown export, shadow mode and quick sound control."
@@ -81,7 +81,7 @@
     "message": "Close"
   },
   "popupNoVideo": {
-    "message": "Open a page with a video to use Vidrift. Videos inside other extensions and browser pages are not available."
+    "message": "Open a page with a video to use Video Drift. Videos inside other extensions and browser pages are not available."
   },
   "pipHint": {
     "message": "The browser blocked the floating window. Click the video once, then press Alt+Shift+P or use the button on the video."
@@ -132,7 +132,7 @@
     "message": "Delete"
   },
   "mdHeading": {
-    "message": "Vidrift bookmarks"
+    "message": "Video Drift bookmarks"
   },
   "btnGroup_play": {
     "message": "Play"

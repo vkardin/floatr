@@ -1,4 +1,4 @@
-# Vidrift — Український текст для магазинів
+# Video Drift — Український текст для магазинів
 
 Use the same texts for Chrome Web Store, Firefox Add-ons and Opera Addons.
 
@@ -8,7 +8,7 @@ Use the same texts for Chrome Web Store, Firefox Add-ons and Opera Addons.
 | Firefox Add-ons | Photos, Music & Videos | 250 characters (summary) |
 | Opera Addons | Productivity | 132 characters |
 
-Website: https://vkardin.github.io/vidrift/ · Support: https://vkardin.github.io/vidrift/support.html · Privacy policy: https://vkardin.github.io/vidrift/privacy.html
+Website: https://vkardin.github.io/video-drift/ · Support: https://vkardin.github.io/video-drift/support.html · Privacy policy: https://vkardin.github.io/video-drift/privacy.html
 
 ## Short description
 
@@ -16,10 +16,10 @@ Website: https://vkardin.github.io/vidrift/ · Support: https://vkardin.github.i
 
 ## Long description
 
-Vidrift виносить будь-яке веб-відео у плаваюче вікно поверх інших, поки ви працюєте, читаєте чи листуєтеся, і запам'ятовує точну секунду зупинки для кожного відео.
+Video Drift виносить будь-яке веб-відео у плаваюче вікно поверх інших, поки ви працюєте, читаєте чи листуєтеся, і запам'ятовує точну секунду зупинки для кожного відео.
 
 РОЗУМНИЙ ПЛАВАЮЧИЙ ПЛЕЄР
-• Вікно Document Picture-in-Picture із власними кнопками Vidrift
+• Вікно Document Picture-in-Picture із власними кнопками Video Drift
 • Субтитри сайту (YouTube, Netflix, Video.js, Plyr, JW Player та інші) залишаються з відео
 • Запасні варіанти: нативний Picture-in-Picture або міні-плеєр на сторінці, який можна перетягувати й розтягувати
 • Обирайте, які кнопки показувати
