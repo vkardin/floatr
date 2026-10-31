@@ -9,9 +9,9 @@
 </p>
 
 <p align="center">
-  <a href="https://github.com/vkardin/aloft/releases"><img src="https://img.shields.io/badge/Chrome-extension-0d9488?logo=googlechrome&logoColor=white" alt="Chrome"></a>
-  <a href="https://github.com/vkardin/aloft/releases"><img src="https://img.shields.io/badge/Firefox-add--on-0d9488?logo=firefoxbrowser&logoColor=white" alt="Firefox"></a>
-  <a href="https://vkardin.github.io/aloft/"><img src="https://img.shields.io/badge/Website-vidrift-0d9488" alt="Website"></a>
+  <a href="https://github.com/vkardin/vidrift/releases"><img src="https://img.shields.io/badge/Chrome-extension-0d9488?logo=googlechrome&logoColor=white" alt="Chrome"></a>
+  <a href="https://github.com/vkardin/vidrift/releases"><img src="https://img.shields.io/badge/Firefox-add--on-0d9488?logo=firefoxbrowser&logoColor=white" alt="Firefox"></a>
+  <a href="https://vkardin.github.io/vidrift/"><img src="https://img.shields.io/badge/Website-vidrift-0d9488" alt="Website"></a>
   <a href="LICENSE"><img src="https://img.shields.io/badge/License-MIT-0d9488" alt="MIT"></a>
 </p>
 
@@ -47,15 +47,15 @@ Global shortcuts can be changed at `chrome://extensions/shortcuts` (Firefox: *Ma
 
 **Manual install from Releases:**
 
-1. Download `vidrift-chrome-<version>.zip` or `vidrift-firefox-<version>.zip` from [Releases](https://github.com/vkardin/aloft/releases).
+1. Download `vidrift-chrome-<version>.zip` or `vidrift-firefox-<version>.zip` from [Releases](https://github.com/vkardin/vidrift/releases).
 2. Chrome, Edge, Brave, Opera: unzip the archive, open `chrome://extensions`, turn on *Developer mode*, click *Load unpacked* and pick the unzipped folder.
 3. Firefox: open `about:debugging#/runtime/this-firefox`, click *Load Temporary Add-on* and pick the zip (or `manifest.json` inside it).
 
 **From source:**
 
 ```bash
-git clone https://github.com/vkardin/aloft.git
-cd aloft
+git clone https://github.com/vkardin/vidrift.git
+cd vidrift
 python3 tools/build.py        # dist/vidrift-chrome-1.0.0.zip, dist/vidrift-firefox-1.0.0.zip
 ```
 
@@ -70,11 +70,11 @@ For development, load the `extension/` folder directly with *Load unpacked*.
 
 ## Privacy
 
-Vidrift works entirely in your browser. Settings and bookmarks are kept in browser sync storage, playback positions in local storage. There are no servers, no analytics and no trackers. Details: [privacy policy](https://vkardin.github.io/aloft/privacy.html).
+Vidrift works entirely in your browser. Settings and bookmarks are kept in browser sync storage, playback positions in local storage. There are no servers, no analytics and no trackers. Details: [privacy policy](https://vkardin.github.io/vidrift/privacy.html).
 
 ## Feedback and support
 
-Found a bug or have an idea? Open an [issue](https://github.com/vkardin/aloft/issues/new/choose). If Vidrift saves you time, you can [support the project](https://vkardin.github.io/aloft/#donate).
+Found a bug or have an idea? Open an [issue](https://github.com/vkardin/vidrift/issues/new/choose). If Vidrift saves you time, you can [support the project](https://vkardin.github.io/vidrift/#donate).
 
 ## Repository
 

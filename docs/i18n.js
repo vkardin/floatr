@@ -34,13 +34,13 @@ window.I18N = {
     copy: 'Скопировать адрес', copied: 'Скопировано',
     fromAuthor: 'От автора Video Glow',
     spTitle: 'Поддержка', spIntro: 'Что-то не работает или есть идея? Вот как получить помощь.',
-    spBugT: 'Сообщить об ошибке', spBugD: 'Создайте issue на <a href="https://github.com/vkardin/aloft/issues/new/choose">GitHub</a>. Укажите браузер и его версию, версию Vidrift и страницу, где возникает проблема.',
+    spBugT: 'Сообщить об ошибке', spBugD: 'Создайте issue на <a href="https://github.com/vkardin/vidrift/issues/new/choose">GitHub</a>. Укажите браузер и его версию, версию Vidrift и страницу, где возникает проблема.',
     spTipsT: 'Быстрые решения',
     spTip1: 'Плавающее окно не открывается: кликните по видео, затем нажмите Alt+Shift+P или кнопку Vidrift поверх видео.',
     spTip2: 'Нет субтитров в плавающем окне: сначала включите субтитры в плеере самого сайта.',
     spTip3: 'Нет предложения «Продолжить с»: проверьте, что опция включена в настройках попапа. Видео короче 30 секунд не запоминаются.',
     spTip4: 'Горячие клавиши меняются на chrome://extensions/shortcuts или в настройках сочетаний дополнений Firefox.',
-    spIdeaT: 'Предложить функцию', spIdeaD: 'Используйте шаблон запроса функции на <a href="https://github.com/vkardin/aloft/issues/new/choose">GitHub</a>.',
+    spIdeaT: 'Предложить функцию', spIdeaD: 'Используйте шаблон запроса функции на <a href="https://github.com/vkardin/vidrift/issues/new/choose">GitHub</a>.',
     pvTitle: 'Политика конфиденциальности', pvUpdated: 'Обновлено: 30 октября 2026',
     pvShortT: 'Коротко', pvShortD: 'Vidrift обрабатывает всё локально в браузере. Он не собирает, не передаёт и не продаёт никаких данных. Никаких серверов, аналитики, рекламы и трекеров.',
     pvStoreT: 'Что хранится и где',
@@ -51,7 +51,7 @@ window.I18N = {
     pvPerm1: 'Доступ к страницам: нужен, чтобы найти видео, вынести его, узнать текущее время и показать «Продолжить с».',
     pvPerm2: 'storage: хранит настройки, закладки и позиции.', pvPerm3: 'activeTab: позволяет попапу общаться с открытой вкладкой.',
     pvDelT: 'Удаление данных', pvDelD: 'Удаляйте закладки в попапе или удалите расширение: тогда браузер сотрёт все его данные.',
-    pvContactT: 'Контакты', pvContactD: 'Вопросы: <a href="https://github.com/vkardin/aloft/issues">GitHub issues</a>.'
+    pvContactT: 'Контакты', pvContactD: 'Вопросы: <a href="https://github.com/vkardin/vidrift/issues">GitHub issues</a>.'
   },
   uk: {
     _title_index: 'Vidrift — плаваючий відеоплеєр з пам\'яттю таймкодів',
@@ -87,13 +87,13 @@ window.I18N = {
     copy: 'Скопіювати адресу', copied: 'Скопійовано',
     fromAuthor: 'Від автора Video Glow',
     spTitle: 'Підтримка', spIntro: 'Щось не працює чи маєте ідею? Ось як отримати допомогу.',
-    spBugT: 'Повідомити про помилку', spBugD: 'Створіть issue на <a href="https://github.com/vkardin/aloft/issues/new/choose">GitHub</a>. Вкажіть браузер і його версію, версію Vidrift і сторінку, де виникає проблема.',
+    spBugT: 'Повідомити про помилку', spBugD: 'Створіть issue на <a href="https://github.com/vkardin/vidrift/issues/new/choose">GitHub</a>. Вкажіть браузер і його версію, версію Vidrift і сторінку, де виникає проблема.',
     spTipsT: 'Швидкі рішення',
     spTip1: 'Плаваюче вікно не відкривається: клацніть по відео, потім натисніть Alt+Shift+P або кнопку Vidrift поверх відео.',
     spTip2: 'Немає субтитрів у плаваючому вікні: спершу увімкніть субтитри у плеєрі самого сайту.',
     spTip3: 'Немає пропозиції «Продовжити з»: перевірте, що опцію увімкнено в налаштуваннях попапу. Відео коротші за 30 секунд не запам\'ятовуються.',
     spTip4: 'Гарячі клавіші змінюються на chrome://extensions/shortcuts або в налаштуваннях сполучень додатків Firefox.',
-    spIdeaT: 'Запропонувати функцію', spIdeaD: 'Скористайтеся шаблоном запиту функції на <a href="https://github.com/vkardin/aloft/issues/new/choose">GitHub</a>.',
+    spIdeaT: 'Запропонувати функцію', spIdeaD: 'Скористайтеся шаблоном запиту функції на <a href="https://github.com/vkardin/vidrift/issues/new/choose">GitHub</a>.',
     pvTitle: 'Політика конфіденційності', pvUpdated: 'Оновлено: 30 жовтня 2026',
     pvShortT: 'Коротко', pvShortD: 'Vidrift обробляє все локально в браузері. Він не збирає, не передає й не продає жодних даних. Жодних серверів, аналітики, реклами й трекерів.',
     pvStoreT: 'Що зберігається і де',
@@ -104,6 +104,6 @@ window.I18N = {
     pvPerm1: 'Доступ до сторінок: потрібен, щоб знайти відео, винести його, дізнатися поточний час і показати «Продовжити з».',
     pvPerm2: 'storage: зберігає налаштування, закладки й позиції.', pvPerm3: 'activeTab: дозволяє попапу спілкуватися з відкритою вкладкою.',
     pvDelT: 'Видалення даних', pvDelD: 'Видаляйте закладки в попапі або видаліть розширення: тоді браузер зітре всі його дані.',
-    pvContactT: 'Контакти', pvContactD: 'Питання: <a href="https://github.com/vkardin/aloft/issues">GitHub issues</a>.'
+    pvContactT: 'Контакти', pvContactD: 'Питання: <a href="https://github.com/vkardin/vidrift/issues">GitHub issues</a>.'
   }
 };

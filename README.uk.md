@@ -9,9 +9,9 @@
 </p>
 
 <p align="center">
-  <a href="https://github.com/vkardin/aloft/releases"><img src="https://img.shields.io/badge/Chrome-extension-0d9488?logo=googlechrome&logoColor=white" alt="Chrome"></a>
-  <a href="https://github.com/vkardin/aloft/releases"><img src="https://img.shields.io/badge/Firefox-add--on-0d9488?logo=firefoxbrowser&logoColor=white" alt="Firefox"></a>
-  <a href="https://vkardin.github.io/aloft/"><img src="https://img.shields.io/badge/Website-vidrift-0d9488" alt="Сайт"></a>
+  <a href="https://github.com/vkardin/vidrift/releases"><img src="https://img.shields.io/badge/Chrome-extension-0d9488?logo=googlechrome&logoColor=white" alt="Chrome"></a>
+  <a href="https://github.com/vkardin/vidrift/releases"><img src="https://img.shields.io/badge/Firefox-add--on-0d9488?logo=firefoxbrowser&logoColor=white" alt="Firefox"></a>
+  <a href="https://vkardin.github.io/vidrift/"><img src="https://img.shields.io/badge/Website-vidrift-0d9488" alt="Сайт"></a>
   <a href="LICENSE"><img src="https://img.shields.io/badge/License-MIT-0d9488" alt="MIT"></a>
 </p>
 
@@ -47,15 +47,15 @@ Vidrift виносить будь-яке веб-відео у плаваюче �
 
 **Вручну з Releases:**
 
-1. Завантажте `vidrift-chrome-<версія>.zip` або `vidrift-firefox-<версія>.zip` з [Releases](https://github.com/vkardin/aloft/releases).
+1. Завантажте `vidrift-chrome-<версія>.zip` або `vidrift-firefox-<версія>.zip` з [Releases](https://github.com/vkardin/vidrift/releases).
 2. Chrome, Edge, Brave, Opera: розпакуйте архів, відкрийте `chrome://extensions`, увімкніть *Режим розробника*, натисніть *Завантажити розпаковане* та оберіть теку.
 3. Firefox: відкрийте `about:debugging#/runtime/this-firefox`, натисніть *Завантажити тимчасовий додаток* і оберіть zip.
 
 **З вихідного коду:**
 
 ```bash
-git clone https://github.com/vkardin/aloft.git
-cd aloft
+git clone https://github.com/vkardin/vidrift.git
+cd vidrift
 python3 tools/build.py        # dist/vidrift-chrome-1.0.0.zip, dist/vidrift-firefox-1.0.0.zip
 ```
 
@@ -70,11 +70,11 @@ python3 tools/build.py        # dist/vidrift-chrome-1.0.0.zip, dist/vidrift-fire
 
 ## Приватність
 
-Vidrift працює повністю в браузері. Налаштування та закладки зберігаються в синхронізованому сховищі браузера, позиції перегляду в локальному. Жодних серверів, аналітики й трекерів. Докладніше: [політика конфіденційності](https://vkardin.github.io/aloft/privacy.html).
+Vidrift працює повністю в браузері. Налаштування та закладки зберігаються в синхронізованому сховищі браузера, позиції перегляду в локальному. Жодних серверів, аналітики й трекерів. Докладніше: [політика конфіденційності](https://vkardin.github.io/vidrift/privacy.html).
 
 ## Зворотний зв'язок і підтримка
 
-Знайшли помилку чи маєте ідею? Створіть [issue](https://github.com/vkardin/aloft/issues/new/choose). Якщо Vidrift заощаджує вам час, можна [підтримати проєкт](https://vkardin.github.io/aloft/#donate).
+Знайшли помилку чи маєте ідею? Створіть [issue](https://github.com/vkardin/vidrift/issues/new/choose). Якщо Vidrift заощаджує вам час, можна [підтримати проєкт](https://vkardin.github.io/vidrift/#donate).
 
 ## Репозиторій
 
