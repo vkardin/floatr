@@ -1,12 +1,12 @@
 #!/usr/bin/env python3
-"""Build Aloft release archives for Chrome-family browsers and Firefox.
+"""Build Vidrift release archives for Chrome-family browsers and Firefox.
 
 Usage:
     python3 tools/build.py            # builds both targets into dist/
     python3 tools/build.py chrome     # one target only
 
 The version is read from extension/manifest.json and is always part of the
-archive name, e.g. dist/aloft-chrome-1.0.0.zip.
+archive name, e.g. dist/vidrift-chrome-1.0.0.zip.
 """
 import json
 import sys
@@ -16,8 +16,8 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent.parent
 SRC = ROOT / "extension"
 DIST = ROOT / "dist"
-NAME = "aloft"
-GECKO_ID = "aloft@vkardin.github.io"
+NAME = "vidrift"
+GECKO_ID = "vidrift@vkardin.github.io"
 SKIP = {".DS_Store", "Thumbs.db"}
 
 

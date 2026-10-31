@@ -1,6 +1,6 @@
 ---
 name: Bug report
-about: Something in Aloft does not work as expected
+about: Something in Vidrift does not work as expected
 labels: bug
 ---
 
@@ -14,5 +14,5 @@ labels: bug
 
 **Environment**
 - Browser and version:
-- Aloft version:
+- Vidrift version:
 - Site where it happens (URL):

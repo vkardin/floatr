@@ -1,6 +1,6 @@
 ---
 name: Feature request
-about: Suggest an idea for Aloft
+about: Suggest an idea for Vidrift
 labels: enhancement
 ---
 

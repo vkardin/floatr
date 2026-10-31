@@ -1,4 +1,4 @@
-# Aloft — store graphics specification
+# Vidrift — store graphics specification
 
 Accent colour: `#2dd4bf` on dark `#11141c`, secondary `#0d9488`. Logo source: `docs/img/logo.svg`.
 
@@ -28,7 +28,7 @@ Use the browser interface in the matching language, the system dark theme, and 1
 
 | Asset | Size | Content |
 | --- | --- | --- |
-| Small promo tile (Chrome) | 440×280 | Logo, "Aloft", tagline "Video that floats and remembers" |
+| Small promo tile (Chrome) | 440×280 | Logo, "Vidrift", tagline "Video that floats and remembers" |
 | Marquee (Chrome) | 1400×560 | Floating window mockup on the right, logo and tagline on the left |
 | Opera promo | 300×188 | Same as the small tile |
 

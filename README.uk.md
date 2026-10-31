@@ -1,6 +1,6 @@
-<p align="center"><img src="docs/img/logo.svg" width="96" alt="Логотип Aloft"></p>
+<p align="center"><img src="docs/img/logo.svg" width="96" alt="Логотип Vidrift"></p>
 
-<h1 align="center">Aloft</h1>
+<h1 align="center">Vidrift</h1>
 
 <p align="center"><b>Плаваючий відеоплеєр, який пам'ятає, де ви зупинилися.</b></p>
 
@@ -11,17 +11,17 @@
 <p align="center">
   <a href="https://github.com/vkardin/aloft/releases"><img src="https://img.shields.io/badge/Chrome-extension-0d9488?logo=googlechrome&logoColor=white" alt="Chrome"></a>
   <a href="https://github.com/vkardin/aloft/releases"><img src="https://img.shields.io/badge/Firefox-add--on-0d9488?logo=firefoxbrowser&logoColor=white" alt="Firefox"></a>
-  <a href="https://vkardin.github.io/aloft/"><img src="https://img.shields.io/badge/Website-aloft-0d9488" alt="Сайт"></a>
+  <a href="https://vkardin.github.io/aloft/"><img src="https://img.shields.io/badge/Website-vidrift-0d9488" alt="Сайт"></a>
   <a href="LICENSE"><img src="https://img.shields.io/badge/License-MIT-0d9488" alt="MIT"></a>
 </p>
 
-Aloft виносить будь-яке веб-відео у плаваюче вікно поверх інших, забирає з собою субтитри сайту та запам'ятовує точну секунду зупинки для кожного відео. Позначайте моменти нотатками, вивантажуйте їх в охайний Markdown для Obsidian чи Notion і діліться посиланнями, що відкриваються одразу на потрібному таймкоді.
+Vidrift виносить будь-яке веб-відео у плаваюче вікно поверх інших, забирає з собою субтитри сайту та запам'ятовує точну секунду зупинки для кожного відео. Позначайте моменти нотатками, вивантажуйте їх в охайний Markdown для Obsidian чи Notion і діліться посиланнями, що відкриваються одразу на потрібному таймкоді.
 
 ## Можливості
 
-- **Розумний плаваючий плеєр.** Document Picture-in-Picture API: у вікні є власні кнопки Aloft і субтитри сайту. Якщо API немає, використовується нативний Picture-in-Picture, а там, де немає і його (наприклад, у Firefox), вбудований міні-плеєр на сторінці, який можна перетягувати й розтягувати.
+- **Розумний плаваючий плеєр.** Document Picture-in-Picture API: у вікні є власні кнопки Vidrift і субтитри сайту. Якщо API немає, використовується нативний Picture-in-Picture, а там, де немає і його (наприклад, у Firefox), вбудований міні-плеєр на сторінці, який можна перетягувати й розтягувати.
 - **Субтитри не зникають.** Саби, які малює сам сайт (YouTube, Netflix, Video.js, Plyr, JW Player, Shaka та інші), дублюються у плаваюче вікно.
-- **Пам'ять таймкодів.** Aloft зберігає позицію кожного відео й під час наступного відкриття пропонує «Продовжити з 12:34?».
+- **Пам'ять таймкодів.** Vidrift зберігає позицію кожного відео й під час наступного відкриття пропонує «Продовжити з 12:34?».
 - **Закладки та нотатки до кадру.** З попапу, з плаваючого вікна або за <kbd>Alt</kbd>+<kbd>Shift</kbd>+<kbd>B</kbd>.
 - **Експорт у Markdown.** Нотатки одного відео або всі одразу в чистий `.md` з клікабельними таймкодами.
 - **Копіювати посилання з таймкодом** в один клік (YouTube, Vimeo, Twitch і звичайні посилання `#t=`).
@@ -47,7 +47,7 @@ Aloft виносить будь-яке веб-відео у плаваюче в�
 
 **Вручну з Releases:**
 
-1. Завантажте `aloft-chrome-<версія>.zip` або `aloft-firefox-<версія>.zip` з [Releases](https://github.com/vkardin/aloft/releases).
+1. Завантажте `vidrift-chrome-<версія>.zip` або `vidrift-firefox-<версія>.zip` з [Releases](https://github.com/vkardin/aloft/releases).
 2. Chrome, Edge, Brave, Opera: розпакуйте архів, відкрийте `chrome://extensions`, увімкніть *Режим розробника*, натисніть *Завантажити розпаковане* та оберіть теку.
 3. Firefox: відкрийте `about:debugging#/runtime/this-firefox`, натисніть *Завантажити тимчасовий додаток* і оберіть zip.
 
@@ -56,7 +56,7 @@ Aloft виносить будь-яке веб-відео у плаваюче в�
 ```bash
 git clone https://github.com/vkardin/aloft.git
 cd aloft
-python3 tools/build.py        # dist/aloft-chrome-1.0.0.zip, dist/aloft-firefox-1.0.0.zip
+python3 tools/build.py        # dist/vidrift-chrome-1.0.0.zip, dist/vidrift-firefox-1.0.0.zip
 ```
 
 Для розробки завантажте теку `extension/` напряму через *Завантажити розпаковане*.
@@ -64,17 +64,17 @@ python3 tools/build.py        # dist/aloft-chrome-1.0.0.zip, dist/aloft-firefox-
 ### Як перевірити локально
 
 1. Завантажте `extension/` як розпаковане розширення й відкрийте сторінку з відео (наприклад, YouTube).
-2. Наведіть курсор на відео й натисніть кнопку Aloft у правому верхньому куті або <kbd>Alt</kbd>+<kbd>Shift</kbd>+<kbd>P</kbd>. Увімкніть субтитри й переконайтеся, що вони видні у плаваючому вікні.
+2. Наведіть курсор на відео й натисніть кнопку Vidrift у правому верхньому куті або <kbd>Alt</kbd>+<kbd>Shift</kbd>+<kbd>P</kbd>. Увімкніть субтитри й переконайтеся, що вони видні у плаваючому вікні.
 3. Подивіться трохи, перезавантажте сторінку й натисніть «Продовжити».
 4. Додайте кілька закладок з нотатками в попапі й натисніть «Експорт усього».
 
 ## Приватність
 
-Aloft працює повністю в браузері. Налаштування та закладки зберігаються в синхронізованому сховищі браузера, позиції перегляду в локальному. Жодних серверів, аналітики й трекерів. Докладніше: [політика конфіденційності](https://vkardin.github.io/aloft/privacy.html).
+Vidrift працює повністю в браузері. Налаштування та закладки зберігаються в синхронізованому сховищі браузера, позиції перегляду в локальному. Жодних серверів, аналітики й трекерів. Докладніше: [політика конфіденційності](https://vkardin.github.io/aloft/privacy.html).
 
 ## Зворотний зв'язок і підтримка
 
-Знайшли помилку чи маєте ідею? Створіть [issue](https://github.com/vkardin/aloft/issues/new/choose). Якщо Aloft заощаджує вам час, можна [підтримати проєкт](https://vkardin.github.io/aloft/#donate).
+Знайшли помилку чи маєте ідею? Створіть [issue](https://github.com/vkardin/aloft/issues/new/choose). Якщо Vidrift заощаджує вам час, можна [підтримати проєкт](https://vkardin.github.io/aloft/#donate).
 
 ## Репозиторій
 

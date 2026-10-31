@@ -1,4 +1,4 @@
-// Aloft background: relays keyboard commands to the active tab.
+// Vidrift background: relays keyboard commands to the active tab.
 const api = typeof browser !== 'undefined' && browser.commands ? browser : chrome;
 
 api.commands.onCommand.addListener(async (command) => {

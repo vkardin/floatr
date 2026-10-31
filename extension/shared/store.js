@@ -1,4 +1,4 @@
-// Aloft shared helpers: storage, keys, time formatting, Markdown export.
+// Vidrift shared helpers: storage, keys, time formatting, Markdown export.
 // Loaded as a classic script in content scripts and in the popup.
 (function (root) {
   'use strict';
@@ -177,7 +177,7 @@
     return lines.join('\n');
   }
 
-  root.Aloft = {
+  root.Vidrift = {
     api, DEFAULTS, SPEED_MIN, SPEED_MAX, VOLUME_PRESETS,
     hash, videoKey, timeLink, fmtTime,
     getSettings, saveSettings,
