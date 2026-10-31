@@ -6,7 +6,9 @@
 
   const F = globalThis.VideoDrift;
   const api = F.api;
-  const t = (id, subs) => api.i18n.getMessage(id, subs) || id;
+  // Once the extension is updated, this copy of the script is cut off from the extension APIs
+  // until the tab is reloaded. Text falls back to the message id instead of throwing.
+  const t = (id, subs) => { try { return api.i18n.getMessage(id, subs) || id; } catch (e) { return id; } };
 
   const state = {
     settings: F.DEFAULTS,
@@ -22,7 +24,7 @@
   };
 
   F.getSettings().then((s) => { state.settings = s; });
-  api.storage.onChanged.addListener((changes, area) => {
+  if (api.storage) api.storage.onChanged.addListener((changes, area) => {
     if (area === 'sync' && changes.settings) {
       F.getSettings().then((s) => { state.settings = s; applyOpacity(); });
     }
@@ -438,6 +440,7 @@
 
   function buildPlayer(doc, mount, v, win, inPage) {
     const b = state.settings.buttons;
+    let ui = null; // assigned at the end; video events can fire while the player is being built
     const wrap = doc.createElement('div');
     wrap.className = 'fl-root';
     wrap.appendChild(v);
@@ -469,7 +472,7 @@
       seek.style.setProperty('--p', (p * 100) + '%');
       timeEl.textContent = F.fmtTime(v.currentTime) + (isFinite(d) ? ' / ' + F.fmtTime(d) : '');
     };
-    v.addEventListener('timeupdate', () => state.ui === ui && tick());
+    v.addEventListener('timeupdate', () => ui && state.ui === ui && tick());
     mount.appendChild(wrap);
 
     const btn = (icon, title, fn, show) => {
@@ -530,7 +533,7 @@
     btn(ICONS.close, t('btnClose'), () => closePlayer());
 
     let toastTimer;
-    const ui = {
+    ui = {
       dragHandle: wrap,
       toast(text) {
         toastEl.textContent = text;
@@ -546,7 +549,7 @@
         tick();
       }
     };
-    ['play', 'pause', 'ratechange', 'volumechange'].forEach((ev) => v.addEventListener(ev, () => state.ui === ui && ui.refresh()));
+    ['play', 'pause', 'ratechange', 'volumechange'].forEach((ev) => v.addEventListener(ev, () => ui && state.ui === ui && ui.refresh()));
     wrap.addEventListener('dblclick', (e) => { if (!e.target.closest('.fl-bar')) { v.paused ? v.play() : v.pause(); } });
     if (inPage) wrap.tabIndex = 0;
     (inPage ? wrap : win).addEventListener('keydown', (e) => {

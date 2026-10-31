@@ -77,17 +77,36 @@
     return h ? h + ':' + pad(m) + ':' + pad(s) : pad(m) + ':' + pad(s);
   }
 
+  // After the extension is updated or reloaded, scripts already running in open tabs lose
+  // access to the extension APIs until the tab is reloaded. Storage calls then quietly do nothing.
+  function store(area) {
+    try { return api.runtime && api.runtime.id && api.storage ? api.storage[area] : null; } catch (e) { return null; }
+  }
   function get(area, keys) {
-    return new Promise((resolve) => api.storage[area].get(keys, (r) => resolve(r || {})));
+    return new Promise((resolve) => {
+      const st = store(area);
+      if (!st) return resolve({});
+      try { st.get(keys, (r) => resolve(r || {})); } catch (e) { resolve({}); }
+    });
   }
   function set(area, obj) {
-    return new Promise((resolve, reject) => api.storage[area].set(obj, () => {
-      const err = api.runtime.lastError;
-      err ? reject(err) : resolve();
-    }));
+    return new Promise((resolve, reject) => {
+      const st = store(area);
+      if (!st) return resolve();
+      try {
+        st.set(obj, () => {
+          const err = api.runtime.lastError;
+          err ? reject(err) : resolve();
+        });
+      } catch (e) { resolve(); }
+    });
   }
   function remove(area, keys) {
-    return new Promise((resolve) => api.storage[area].remove(keys, () => resolve()));
+    return new Promise((resolve) => {
+      const st = store(area);
+      if (!st) return resolve();
+      try { st.remove(keys, () => resolve()); } catch (e) { resolve(); }
+    });
   }
 
   async function getSettings() {
