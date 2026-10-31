@@ -6,9 +6,9 @@
 <a href="README.md">English</a> · <a href="README.ru.md">Русский</a> · Українська</p>
 
 <p align="center">
-<a href="../../releases"><img alt="Chrome" src="https://img.shields.io/github/v/release/vkardin/video-drift?label=Chrome&logo=googlechrome&logoColor=white"></a>
-<a href="../../releases"><img alt="Firefox" src="https://img.shields.io/github/v/release/vkardin/video-drift?label=Firefox&logo=firefoxbrowser&logoColor=white"></a>
-<a href="https://vkardin.github.io/video-drift/"><img alt="Website" src="https://img.shields.io/badge/site-vkardin.github.io%2Fvideo--drift-222"></a>
+<a href="../../releases"><img alt="Chrome" src="https://img.shields.io/github/v/release/vkardin/videodrift?label=Chrome&logo=googlechrome&logoColor=white"></a>
+<a href="../../releases"><img alt="Firefox" src="https://img.shields.io/github/v/release/vkardin/videodrift?label=Firefox&logo=firefoxbrowser&logoColor=white"></a>
+<a href="https://vkardin.github.io/videodrift/"><img alt="Website" src="https://img.shields.io/badge/site-vkardin.github.io%2Fvideo--drift-222"></a>
 <a href="LICENSE"><img alt="MIT" src="https://img.shields.io/badge/license-MIT-blue"></a>
 </p>
 
@@ -42,12 +42,12 @@ Video Drift виносить будь-яке веб-відео у плаваюч
 
 ## Приватність
 
-Video Drift не збирає даних і нічого нікуди не надсилає: усе працює на вашому пристрої. [Політика конфіденційності](https://vkardin.github.io/video-drift/privacy.html).
+Video Drift не збирає даних і нічого нікуди не надсилає: усе працює на вашому пристрої. [Політика конфіденційності](https://vkardin.github.io/videodrift/privacy.html).
 
 ## Зворотний зв'язок і підтримка
 
-- Ідеї та помилки: [сторінка зворотного зв'язку](https://vkardin.github.io/video-drift/support.html) або [GitHub Issues](../../issues/new/choose)
-- Підтримати проєкт криптовалютою: [https://vkardin.github.io/video-drift/#donate](https://vkardin.github.io/video-drift/#donate)
+- Ідеї та помилки: [сторінка зворотного зв'язку](https://vkardin.github.io/videodrift/support.html) або [GitHub Issues](../../issues/new/choose)
+- Підтримати проєкт криптовалютою: [https://vkardin.github.io/videodrift/#donate](https://vkardin.github.io/videodrift/#donate)
 
 ## Репозиторій
 
