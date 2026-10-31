@@ -63,6 +63,7 @@ Video Drift collects no data and sends nothing anywhere: everything runs on your
 - [Video Glow](https://vkardin.github.io/video-glow/): ambient light in the colours of the picture around any video in your browser.
 - [Leveler](https://vkardin.github.io/leveler/): evens out the loudness of any video: quiet dialogue louder, explosions softer.
 - [Snapt](https://vkardin.github.io/snapt/): a fast, open-source screenshot tool for Windows, macOS and Linux.
+- [UNI](https://vkardin.github.io/uni-homebot/): your home server in Telegram, with apps, monitoring and a mini app.
 
 ## License
 

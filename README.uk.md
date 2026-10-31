@@ -63,6 +63,7 @@ Video Drift не збирає даних і нічого нікуди не на�
 - [Video Glow](https://vkardin.github.io/video-glow/): фонове підсвічування в кольорах картинки навколо будь-якого відео в браузері.
 - [Leveler](https://vkardin.github.io/leveler/): вирівнює гучність будь-якого відео: тихі діалоги гучніше, вибухи тихіше.
 - [Snapt](https://vkardin.github.io/snapt/): швидкі скриншоти з відкритим кодом для Windows, macOS і Linux.
+- [UNI](https://vkardin.github.io/uni-homebot/): домашній сервер у Telegram, із застосунками, моніторингом і міні-застосунком.
 
 ## Ліцензія
 
