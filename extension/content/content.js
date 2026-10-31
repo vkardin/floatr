@@ -281,17 +281,24 @@
     state.ui = buildPlayer(pw.document, pw.document.body, v, pw);
     if (wasPlaying) v.play().catch(() => {});
     pw.addEventListener('pagehide', () => teardown());
-    // Chrome may reopen the window at the size it remembers for this site. Fit the height to the
-    // video's aspect ratio right away, and again on the first click (resizing can need a user gesture).
+    // Chrome caps a Document PiP window at about 80% of the screen and reopens it at the size it
+    // remembers for the site, so the window can come out with a different shape than the video.
+    // fit() trims whichever side is too long; it only shrinks, so it never runs into that cap.
+    // Resizing is allowed only during a user gesture, so it also runs on every click or key press.
     const fit = () => {
       const vr = (v.videoWidth && v.videoHeight) ? v.videoHeight / v.videoWidth : ratio;
-      const dh = Math.round(pw.innerWidth * vr) - pw.innerHeight;
-      if (Math.abs(dh) > 4) { try { pw.resizeBy(0, dh); } catch (e) { /* not allowed yet */ } }
+      const iw = pw.innerWidth, ih = pw.innerHeight;
+      if (!iw || !ih) return false;
+      let w = iw, h = Math.round(iw * vr);
+      if (h > ih) { h = ih; w = Math.round(ih / vr); }
+      const dw = w - iw, dh = h - ih;
+      if (Math.abs(dw) <= 4 && Math.abs(dh) <= 4) return true;
+      try { pw.resizeTo(pw.outerWidth + dw, pw.outerHeight + dh); return true; } catch (e) { return false; }
     };
+    state.fitWindow = fit;
     fit();
-    pw.addEventListener('pointerdown', fit);
-    let resizeTimer;
-    pw.addEventListener('resize', () => { clearTimeout(resizeTimer); resizeTimer = setTimeout(fit, 250); });
+    pw.addEventListener('pointerdown', fit, true);
+    pw.addEventListener('keydown', fit, true);
     v.addEventListener('loadedmetadata', () => state.pipWindow === pw && fit(), { once: true });
     applyOpacity();
   }
@@ -352,6 +359,7 @@
     if (state.floatHost) state.floatHost.remove();
     state.floatHost = null;
     state.pipWindow = null;
+    state.fitWindow = null;
     state.ui = null;
     state.mode = null;
     state.video = null;
@@ -497,6 +505,7 @@
       range.addEventListener('pointerdown', (e) => e.stopPropagation());
       bar.appendChild(range);
     }
+    if (!inPage) btn(ICONS.fit, t('btnFit'), () => { if (state.fitWindow) state.fitWindow(); });
     btn(ICONS.close, t('btnClose'), () => closePlayer());
 
     let toastTimer;
@@ -600,6 +609,7 @@
     faster: svg('<path d="M12 5v14M5 12h14"/>'),
     bookmark: svg('<path d="M6 3h12v18l-6-4-6 4z"/>'),
     link: svg('<path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7l-1 1"/><path d="M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1-1"/>'),
+    fit: svg('<path d="M4 9V5h4M20 9V5h-4M4 15v4h4M20 15v4h-4"/><rect x="8" y="9" width="8" height="6" rx="1"/>'),
     close: svg('<path d="M6 6l12 12M18 6L6 18"/>')
   };
 

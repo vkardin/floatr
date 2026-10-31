@@ -160,5 +160,8 @@
   },
   "opacityHint": {
     "message": "Opacity works in the mini player over the page. A separate window is always opaque: the browser does not let it be see-through."
+  },
+  "btnFit": {
+    "message": "Fit the window to the video"
   }
 }
